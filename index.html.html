@@ -5,541 +5,6523 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08264d">
 <title>SHUTLER — Campus Change Credit</title>
+
 <style>
 :root{
-  --navy:#08264d;--navy2:#0d3568;--blue:#1769ff;--blue2:#0d4fd8;
-  --sky:#eaf3ff;--green:#13a05a;--green2:#0d7e45;--mint:#e9f9f0;
-  --amber:#d99012;--amberbg:#fff6df;--red:#d64545;--redbg:#fff0f0;
-  --bg:#f5f8fc;--card:#fff;--text:#10233f;--muted:#6b7b91;--line:#dfe7f1;
-  --shadow:0 18px 45px rgba(15,39,70,.08);--radius:20px;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --navy:#08264d;
+  --navy2:#0d3568;
+  --blue:#1769ff;
+  --blue2:#0d4fd8;
+  --sky:#eaf3ff;
+  --green:#13a05a;
+  --green2:#0d7e45;
+  --mint:#e9f9f0;
+  --amber:#d99012;
+  --amberbg:#fff6df;
+  --red:#d64545;
+  --redbg:#fff0f0;
+  --bg:#f5f8fc;
+  --card:#fff;
+  --text:#10233f;
+  --muted:#6b7b91;
+  --line:#dfe7f1;
+  --shadow:0 18px 45px rgba(15,39,70,.08);
+  --radius:20px;
+
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text)}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
-.hidden{display:none!important}
-.shell{width:min(1180px,92%);margin:0 auto}
-.top{height:76px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:sticky;top:0;z-index:20}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--navy)}
-.brand-mark{width:42px;height:42px;display:block}
-.brand-name{font-weight:950;letter-spacing:.08em;font-size:20px;line-height:1}
-.brand-tag{font-size:9px;letter-spacing:.08em;color:var(--muted);font-weight:800;margin-top:4px}
-.top-actions{display:flex;align-items:center;gap:10px}
-.role-pill{padding:8px 12px;border-radius:999px;background:#eef4fb;color:#355170;font-size:12px;font-weight:850}
-.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-weight:900}
-.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:850;transition:.18s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn:hover{transform:translateY(-1px)}
-.btn.primary{background:var(--navy);color:#fff}.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff}
-.btn.soft{background:#edf4ff;color:#1551b4}.btn.outline{background:#fff;border:1px solid var(--line);color:var(--text)}
-.btn.red{background:var(--redbg);color:var(--red)}.btn.ghost{background:transparent;color:var(--muted)}
-.hero{margin:28px 0 22px;border-radius:28px;overflow:hidden;position:relative;background:radial-gradient(circle at 85% 15%,#2a80e8 0,#124c91 32%,#071f3d 75%);color:#fff;min-height:450px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;padding:58px 52px;box-shadow:0 24px 60px rgba(6,31,61,.18)}
-.hero:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(255,255,255,.1);right:-130px;bottom:-220px}
-.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:950;color:#5c91dc}
-.hero .eyebrow{color:#a8d0ff}
-.hero h1{font-size:clamp(42px,6vw,72px);line-height:.92;letter-spacing:-.04em;margin:12px 0 18px;max-width:650px}
-.hero h1 span{color:#77b0ff}
-.hero p{max-width:650px;color:#dbe9fa;line-height:1.7;font-size:16px}
-.hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px}
-.hero-visual{position:relative;min-height:320px;display:grid;place-items:center}
-.bus-scene{width:min(470px,100%);height:300px;position:relative}
-.bus{position:absolute;left:40px;bottom:35px;width:340px;height:145px;border-radius:28px 35px 20px 20px;background:linear-gradient(180deg,#eaf4ff 0 35%,#1680ed 36% 72%,#0c4c9b 73%);box-shadow:0 25px 40px rgba(0,0,0,.22);border:4px solid rgba(255,255,255,.3)}
-.bus:before{content:"";position:absolute;left:22px;top:16px;width:292px;height:50px;border-radius:15px;background:#173653;box-shadow:inset 0 0 0 3px #2f8ef0}
-.bus:after{content:"SHUTLER";position:absolute;left:46px;top:29px;color:#fff;font-size:13px;font-weight:950;letter-spacing:.18em}
-.bus-window{position:absolute;right:17px;top:16px;width:48px;height:50px;border-radius:12px;background:#cbe4ff;border:3px solid #173653}
-.wheel{position:absolute;bottom:-24px;width:53px;height:53px;border-radius:50%;background:#15253a;border:9px solid #fff;box-shadow:0 2px 0 #07182c}
-.wheel.one{left:53px}.wheel.two{right:50px}
-.coin{position:absolute;right:26px;top:35px;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#22c978,#0a8c4b);border:7px solid rgba(255,255,255,.8);box-shadow:0 16px 35px rgba(0,0,0,.25);font-size:32px;font-weight:950;color:#fff;z-index:3}
-.qr-card{position:absolute;right:4px;bottom:18px;width:145px;height:170px;background:#fff;border-radius:20px;padding:13px;box-shadow:0 24px 50px rgba(0,0,0,.25);transform:rotate(4deg);z-index:4;color:var(--navy)}
-.qr-card .fake-qr{height:105px;border:5px solid #111;border-radius:9px;background:repeating-linear-gradient(45deg,#111 0 4px,#fff 4px 8px);position:relative;overflow:hidden}
-.qr-card .fake-qr:after{content:"";position:absolute;inset:12px;background:repeating-linear-gradient(90deg,transparent 0 7px,#111 7px 11px),repeating-linear-gradient(0deg,transparent 0 8px,#111 8px 12px);mix-blend-mode:multiply}
-.qr-label{font-size:9px;font-weight:900;text-align:center;margin-top:8px;letter-spacing:.08em}
-.feature-strip{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:7px;margin-bottom:28px}
-.feature-step{padding:18px 17px;display:flex;gap:12px;align-items:flex-start;border-right:1px solid var(--line)}
-.feature-step:last-child{border-right:0}
-.step-icon{width:42px;height:42px;flex:0 0 42px;border-radius:14px;background:#edf4ff;color:var(--blue);display:grid;place-items:center;font-weight:950;font-size:17px}
-.feature-step strong{display:block;font-size:13px}.feature-step span{display:block;color:var(--muted);font-size:11px;line-height:1.45;margin-top:4px}
-.card,.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.card{padding:24px;margin:16px 0}.card h2,.card h3{margin:0 0 7px}
-.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin:30px 0 18px}
-.page-head h2{font-size:32px;letter-spacing:-.03em;margin:5px 0}.page-head p{max-width:650px}
-.muted{color:var(--muted)}.small{font-size:12px}.centered{text-align:center}
-.dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stat{padding:19px;position:relative;overflow:hidden}.stat:after{content:"";position:absolute;width:65px;height:65px;border-radius:50%;right:-24px;top:-24px;background:#eef5ff}
-.stat .label{font-size:11px;color:var(--muted);font-weight:850;text-transform:uppercase;letter-spacing:.06em}
-.stat .value{font-size:27px;font-weight:950;margin-top:9px;position:relative;z-index:1}
-.feature-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}
-.feature{padding:19px;border:1px solid var(--line);background:#fff;border-radius:17px;text-align:left;transition:.18s ease;min-height:126px}
-.feature:hover{border-color:#9dbef0;box-shadow:0 10px 25px rgba(23,105,255,.08);transform:translateY(-2px)}
-.feature .icon{width:40px;height:40px;border-radius:12px;background:#edf4ff;color:var(--blue);display:grid;place-items:center;font-weight:950;margin-bottom:12px}
-.feature strong{display:block}.feature span{font-size:11px;color:var(--muted);line-height:1.45}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.grid.two{grid-template-columns:1.1fr .9fr}
-.list{display:grid;gap:9px}.row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}.row-main{min-width:0}.row-title{font-weight:850}.row-sub{font-size:11px;color:var(--muted);margin-top:4px}.actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.badge{display:inline-flex;align-items:center;padding:6px 9px;border-radius:999px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.04em}
-.badge.pending{background:var(--amberbg);color:var(--amber)}.badge.approved,.badge.confirmed,.badge.resolved{background:var(--mint);color:var(--green2)}.badge.rejected,.badge.open{background:var(--redbg);color:var(--red)}.badge.claimed{background:#eef3fa;color:#5d6b7e}
-.money-green{color:var(--green2)}.money-red{color:var(--red)}
-.scanner{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.scanner-box{min-height:330px;border:1px dashed #b7c5d8;border-radius:18px;display:grid;place-items:center;background:#f9fbfe;overflow:hidden}
-.driver-card{border:1px solid #cfe7d8;background:#f6fff9;border-radius:15px;padding:17px}
-.credit-card{background:linear-gradient(135deg,#08264d,#155fb9);color:#fff;border:0}.credit-card .muted{color:#d3e5fa}.credit{font-size:44px;font-weight:950;margin:7px 0}
-.timeline{display:flex;gap:7px;margin:18px 0 8px}.timeline .step{height:6px;flex:1;border-radius:99px;background:#d9e2ed}.timeline .step.done{background:var(--green)}.timeline-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
-form{display:grid;gap:13px}label{font-size:12px;font-weight:850}input,select,textarea{width:100%;border:1px solid #cbd6e3;border-radius:12px;padding:12px;background:#fff;outline:0;color:var(--text)}input:focus,select:focus,textarea:focus{border-color:#6d9fec;box-shadow:0 0 0 3px #e8f1ff}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.auth-wrap{min-height:calc(100vh - 76px);display:grid;place-items:center;padding:50px 0}.auth{width:min(510px,100%);padding:30px}
-.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:6px 0 13px}.role-card{border:1px solid var(--line);border-radius:13px;padding:14px;cursor:pointer}.role-card.selected{border:2px solid var(--blue);background:#f1f6ff}.role-card input{display:none}.role-card strong{display:block}.role-card span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
-.helper,.notice,.danger-note{padding:13px;border-radius:12px;font-size:11px;line-height:1.55}.helper{background:#f7f9fc;border:1px dashed #cbd5e1;color:var(--muted)}.notice{background:#eef5ff;color:#214e90}.danger-note{background:var(--redbg);color:#8d3030}
-.wallet-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.wallet-balance{min-width:190px;padding:15px;border-radius:15px;background:#f4f8ff;border:1px solid #dce8f7}.wallet-balance span{display:block;font-size:10px;color:var(--muted);font-weight:850;text-transform:uppercase}.wallet-balance strong{display:block;font-size:26px;margin-top:4px}
-.bank-transfer{margin-top:18px;padding:18px;border-radius:15px;background:#fafcff;border:1px solid var(--line)}.bank-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:13px 0}.bank-grid>div{padding:12px;border-radius:11px;background:#fff;border:1px solid var(--line)}.bank-grid span{display:block;font-size:9px;color:var(--muted);font-weight:850;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}.bank-grid strong{font-size:11px}
-.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #cfd8e5;border-radius:13px}
-.modal{position:fixed;inset:0;background:rgba(4,16,32,.68);display:grid;place-items:center;padding:20px;z-index:50}.modal-box{background:#fff;border-radius:22px;width:min(530px,100%);padding:27px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.25)}.close{position:absolute;right:15px;top:10px;border:0;background:transparent;font-size:28px;color:var(--muted)}.qr-holder{display:flex;justify-content:center;padding:18px}.qr-holder img,.qr-holder canvas{border-radius:8px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#10233f;color:#fff;padding:12px 18px;border-radius:12px;z-index:80;font-weight:800;font-size:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)}
-.footer{padding:35px 0 45px;text-align:center;color:var(--muted);font-size:11px}.footer strong{color:var(--navy)}
-.role-tabs{display:flex;background:#edf3fa;border-radius:15px;padding:5px;margin:0 0 20px}.role-tab{flex:1;border:0;background:transparent;padding:12px;border-radius:11px;color:#59708c;font-weight:850}.role-tab.active{background:var(--navy);color:#fff}
-.how{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.how-item{padding:20px;border-radius:17px;background:#f9fbff;border:1px solid var(--line)}.how-num{width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:950;margin-bottom:12px}
-.pitch-banner{margin:20px 0;padding:23px;border-radius:20px;background:linear-gradient(100deg,#0a2d59,#155fb9);color:#fff;display:flex;justify-content:space-between;gap:20px;align-items:center}.pitch-banner p{color:#d7e7fb;margin:6px 0 0;font-size:12px}
-@media(max-width:950px){.hero{grid-template-columns:1fr;padding:44px 32px}.hero-visual{min-height:280px}.dashboard-grid{grid-template-columns:repeat(2,1fr)}.feature-row{grid-template-columns:repeat(2,1fr)}.feature-strip{grid-template-columns:repeat(2,1fr)}.feature-step:nth-child(2){border-right:0}.feature-step:nth-child(-n+2){border-bottom:1px solid var(--line)}.grid.two{grid-template-columns:1fr}.scanner{grid-template-columns:1fr}}
-@media(max-width:620px){.top{height:68px}.brand-name{font-size:17px}.brand-mark{width:38px;height:38px}.role-pill{display:none}.hero{margin-top:16px;padding:34px 23px;border-radius:22px}.hero h1{font-size:43px}.hero-visual{min-height:230px}.bus{left:10px;transform:scale(.78);transform-origin:left bottom}.qr-card{right:0;transform:scale(.8) rotate(4deg)}.coin{right:20px;transform:scale(.8)}.feature-strip{grid-template-columns:1fr}.feature-step{border-right:0!important;border-bottom:1px solid var(--line)}.feature-step:last-child{border-bottom:0}.dashboard-grid,.feature-row,.how,.role-grid{grid-template-columns:1fr}.form-grid,.bank-grid{grid-template-columns:1fr}.wallet-head{flex-direction:column}.wallet-balance{width:100%}.page-head{flex-direction:column}.row{align-items:flex-start;flex-direction:column}.auth{padding:23px}}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.shell{
+  width:min(1180px,92%);
+  margin:0 auto;
+}
+
+.top{
+  height:76px;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 4%;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-decoration:none;
+  color:var(--navy);
+  border:0;
+  background:transparent;
+  padding:0;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+  display:block;
+}
+
+.brand-name{
+  font-weight:950;
+  letter-spacing:.08em;
+  font-size:20px;
+  line-height:1;
+}
+
+.brand-tag{
+  font-size:9px;
+  letter-spacing:.08em;
+  color:var(--muted);
+  font-weight:800;
+  margin-top:4px;
+  display:block;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.role-pill{
+  padding:8px 12px;
+  border-radius:999px;
+  background:#eef4fb;
+  color:#355170;
+  font-size:12px;
+  font-weight:850;
+}
+
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--navy);
+  color:#fff;
+  font-weight:900;
+}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:11px 16px;
+  font-weight:850;
+  transition:.18s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn.primary{
+  background:var(--navy);
+  color:#fff;
+}
+
+.btn.blue{
+  background:var(--blue);
+  color:#fff;
+}
+
+.btn.green{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn.soft{
+  background:#edf4ff;
+  color:#1551b4;
+}
+
+.btn.outline{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--text);
+}
+
+.btn.red{
+  background:var(--redbg);
+  color:var(--red);
+}
+
+.btn.ghost{
+  background:transparent;
+  color:var(--muted);
+}
+
+.hero{
+  margin:28px 0 22px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  background:radial-gradient(
+    circle at 85% 15%,
+    #2a80e8 0,
+    #124c91 32%,
+    #071f3d 75%
+  );
+  color:#fff;
+  min-height:450px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  padding:58px 52px;
+  box-shadow:0 24px 60px rgba(6,31,61,.18);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  right:-130px;
+  bottom:-220px;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:11px;
+  font-weight:950;
+  color:#5c91dc;
+}
+
+.hero .eyebrow{
+  color:#a8d0ff;
+}
+
+.hero h1{
+  font-size:clamp(42px,6vw,72px);
+  line-height:.92;
+  letter-spacing:-.04em;
+  margin:12px 0 18px;
+  max-width:650px;
+}
+
+.hero h1 span{
+  color:#77b0ff;
+}
+
+.hero p{
+  max-width:650px;
+  color:#dbe9fa;
+  line-height:1.7;
+  font-size:16px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:11px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+
+.hero-visual{
+  position:relative;
+  min-height:320px;
+  display:grid;
+  place-items:center;
+}
+
+.bus-scene{
+  width:min(470px,100%);
+  height:300px;
+  position:relative;
+}
+
+.bus{
+  position:absolute;
+  left:40px;
+  bottom:35px;
+  width:340px;
+  height:145px;
+  border-radius:28px 35px 20px 20px;
+  background:linear-gradient(
+    180deg,
+    #eaf4ff 0 35%,
+    #1680ed 36% 72%,
+    #0c4c9b 73%
+  );
+  box-shadow:0 25px 40px rgba(0,0,0,.22);
+  border:4px solid rgba(255,255,255,.3);
+}
+
+.bus:before{
+  content:"";
+  position:absolute;
+  left:22px;
+  top:16px;
+  width:292px;
+  height:50px;
+  border-radius:15px;
+  background:#173653;
+  box-shadow:inset 0 0 0 3px #2f8ef0;
+}
+
+.bus:after{
+  content:"SHUTLER";
+  position:absolute;
+  left:46px;
+  top:29px;
+  color:#fff;
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:.18em;
+}
+
+.bus-window{
+  position:absolute;
+  right:17px;
+  top:16px;
+  width:48px;
+  height:50px;
+  border-radius:12px;
+  background:#cbe4ff;
+  border:3px solid #173653;
+}
+
+.wheel{
+  position:absolute;
+  bottom:-24px;
+  width:53px;
+  height:53px;
+  border-radius:50%;
+  background:#15253a;
+  border:9px solid #fff;
+  box-shadow:0 2px 0 #07182c;
+}
+
+.wheel.one{
+  left:53px;
+}
+
+.wheel.two{
+  right:50px;
+}
+
+.coin{
+  position:absolute;
+  right:26px;
+  top:35px;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(
+    145deg,
+    #22c978,
+    #0a8c4b
+  );
+  border:7px solid rgba(255,255,255,.8);
+  box-shadow:0 16px 35px rgba(0,0,0,.25);
+  font-size:32px;
+  font-weight:950;
+  color:#fff;
+  z-index:3;
+}
+
+.qr-card{
+  position:absolute;
+  right:4px;
+  bottom:18px;
+  width:145px;
+  height:170px;
+  background:#fff;
+  border-radius:20px;
+  padding:13px;
+  box-shadow:0 24px 50px rgba(0,0,0,.25);
+  transform:rotate(4deg);
+  z-index:4;
+  color:var(--navy);
+}
+
+.qr-card .fake-qr{
+  height:105px;
+  border:5px solid #111;
+  border-radius:9px;
+  background:repeating-linear-gradient(
+    45deg,
+    #111 0 4px,
+    #fff 4px 8px
+  );
+  position:relative;
+  overflow:hidden;
+}
+
+.qr-card .fake-qr:after{
+  content:"";
+  position:absolute;
+  inset:12px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 7px,
+      #111 7px 11px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 8px,
+      #111 8px 12px
+    );
+  mix-blend-mode:multiply;
+}
+
+.qr-label{
+  font-size:9px;
+  font-weight:900;
+  text-align:center;
+  margin-top:8px;
+  letter-spacing:.08em;
+}
+
+.feature-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:7px;
+  margin-bottom:28px;
+}
+
+.feature-step{
+  padding:18px 17px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  border-right:1px solid var(--line);
+}
+
+.feature-step:last-child{
+  border-right:0;
+}
+
+.step-icon{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  border-radius:14px;
+  background:#edf4ff;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  font-weight:950;
+  font-size:17px;
+}
+
+.feature-step strong{
+  display:block;
+  font-size:13px;
+}
+
+.feature-step span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+  margin-top:4px;
+}
+
+.card,
+.stat{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.card{
+  padding:24px;
+  margin:16px 0;
+}
+
+.card h2,
+.card h3{
+  margin:0 0 7px;
+}
+
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  margin:30px 0 18px;
+}
+
+.page-head h2{
+  font-size:32px;
+  letter-spacing:-.03em;
+  margin:5px 0;
+}
+
+.page-head p{
+  max-width:650px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.small{
+  font-size:12px;
+}
+
+.centered{
+  text-align:center;
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.stat{
+  padding:19px;
+  position:relative;
+  overflow:hidden;
+}
+
+.stat:after{
+  content:"";
+  position:absolute;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  right:-24px;
+  top:-24px;
+  background:#eef5ff;
+}
+
+.stat .label{
+  font-size:11px;
+  color:var(--muted);
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.stat .value{
+  font-size:27px;
+  font-weight:950;
+  margin-top:9px;
+  position:relative;
+  z-index:1;
+}
+
+.feature-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+  margin:18px 0;
+}
+
+.feature{
+  padding:19px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:17px;
+  text-align:left;
+  transition:.18s ease;
+  min-height:126px;
+}
+
+.feature:hover{
+  border-color:#9dbef0;
+  box-shadow:0 10px 25px rgba(23,105,255,.08);
+  transform:translateY(-2px);
+}
+
+.feature .icon{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:#edf4ff;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  font-weight:950;
+  margin-bottom:12px;
+}
+
+.feature strong{
+  display:block;
+}
+
+.feature span{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.45;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.grid.two{
+  grid-template-columns:1.1fr .9fr;
+}
+
+.list{
+  display:grid;
+  gap:9px;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+}
+
+.row-main{
+  min-width:0;
+}
+
+.row-title{
+  font-weight:850;
+}
+
+.row-sub{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.badge.pending{
+  background:var(--amberbg);
+  color:var(--amber);
+}
+
+.badge.approved,
+.badge.confirmed,
+.badge.resolved{
+  background:var(--mint);
+  color:var(--green2);
+}
+
+.badge.rejected,
+.badge.open{
+  background:var(--redbg);
+  color:var(--red);
+}
+
+.badge.claimed{
+  background:#eef3fa;
+  color:#5d6b7e;
+}
+
+.money-green{
+  color:var(--green2);
+}
+
+.money-red{
+  color:var(--red);
+}
+
+.scanner{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+}
+
+.scanner-box{
+  min-height:330px;
+  border:1px dashed #b7c5d8;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  background:#f9fbfe;
+  overflow:hidden;
+}
+
+.driver-card{
+  border:1px solid #cfe7d8;
+  background:#f6fff9;
+  border-radius:15px;
+  padding:17px;
+}
+
+.credit-card{
+  background:linear-gradient(
+    135deg,
+    #08264d,
+    #155fb9
+  );
+  color:#fff;
+  border:0;
+}
+
+.credit-card .muted{
+  color:#d3e5fa;
+}
+
+.credit{
+  font-size:44px;
+  font-weight:950;
+  margin:7px 0;
+}
+
+.timeline{
+  display:flex;
+  gap:7px;
+  margin:18px 0 8px;
+}
+
+.timeline .step{
+  height:6px;
+  flex:1;
+  border-radius:99px;
+  background:#d9e2ed;
+}
+
+.timeline .step.done{
+  background:var(--green);
+}
+
+.timeline-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+  color:var(--muted);
+}
+
+form{
+  display:grid;
+  gap:13px;
+}
+
+label{
+  font-size:12px;
+  font-weight:850;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #cbd6e3;
+  border-radius:12px;
+  padding:12px;
+  background:#fff;
+  outline:0;
+  color:var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#6d9fec;
+  box-shadow:0 0 0 3px #e8f1ff;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.auth-wrap{
+  min-height:calc(100vh - 76px);
+  display:grid;
+  place-items:center;
+  padding:50px 0;
+}
+
+.auth{
+  width:min(510px,100%);
+  padding:30px;
+}
+
+.role-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin:6px 0 13px;
+}
+
+.role-card{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:14px;
+  cursor:pointer;
+}
+
+.role-card.selected{
+  border:2px solid var(--blue);
+  background:#f1f6ff;
+}
+
+.role-card input{
+  display:none;
+}
+
+.role-card strong{
+  display:block;
+}
+
+.role-card span{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.helper,
+.notice,
+.danger-note{
+  padding:13px;
+  border-radius:12px;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.helper{
+  background:#f7f9fc;
+  border:1px dashed #cbd5e1;
+  color:var(--muted);
+}
+
+.notice{
+  background:#eef5ff;
+  color:#214e90;
+}
+
+.danger-note{
+  background:var(--redbg);
+  color:#8d3030;
+}
+
+.wallet-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+}
+
+.wallet-balance{
+  min-width:190px;
+  padding:15px;
+  border-radius:15px;
+  background:#f4f8ff;
+  border:1px solid #dce8f7;
+}
+
+.wallet-balance span{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  font-weight:850;
+  text-transform:uppercase;
+}
+
+.wallet-balance strong{
+  display:block;
+  font-size:26px;
+  margin-top:4px;
+}
+
+.bank-transfer{
+  margin-top:18px;
+  padding:18px;
+  border-radius:15px;
+  background:#fafcff;
+  border:1px solid var(--line);
+}
+
+.bank-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:13px 0;
+}
+
+.bank-grid>div{
+  padding:12px;
+  border-radius:11px;
+  background:#fff;
+  border:1px solid var(--line);
+}
+
+.bank-grid span{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin-bottom:5px;
+}
+
+.bank-grid strong{
+  font-size:11px;
+}
+
+.empty{
+  padding:28px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed #cfd8e5;
+  border-radius:13px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(4,16,32,.68);
+  display:grid;
+  place-items:center;
+  padding:20px;
+  z-index:50;
+}
+
+.modal-box{
+  background:#fff;
+  border-radius:22px;
+  width:min(530px,100%);
+  padding:27px;
+  position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,.25);
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:10px;
+  border:0;
+  background:transparent;
+  font-size:28px;
+  color:var(--muted);
+}
+
+.qr-holder{
+  display:flex;
+  justify-content:center;
+  padding:18px;
+}
+
+.qr-holder img,
+.qr-holder canvas{
+  border-radius:8px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%);
+  background:#10233f;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:12px;
+  z-index:80;
+  font-weight:800;
+  font-size:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+
+.footer{
+  padding:35px 0 45px;
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.footer strong{
+  color:var(--navy);
+}
+
+.role-tabs{
+  display:flex;
+  background:#edf3fa;
+  border-radius:15px;
+  padding:5px;
+  margin:0 0 20px;
+}
+
+.role-tab{
+  flex:1;
+  border:0;
+  background:transparent;
+  padding:12px;
+  border-radius:11px;
+  color:#59708c;
+  font-weight:850;
+}
+
+.role-tab.active{
+  background:var(--navy);
+  color:#fff;
+}
+
+.how{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.how-item{
+  padding:20px;
+  border-radius:17px;
+  background:#f9fbff;
+  border:1px solid var(--line);
+}
+
+.how-num{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-weight:950;
+  margin-bottom:12px;
+}
+
+.pitch-banner{
+  margin:20px 0;
+  padding:23px;
+  border-radius:20px;
+  background:linear-gradient(
+    100deg,
+    #0a2d59,
+    #155fb9
+  );
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+}
+
+.pitch-banner p{
+  color:#d7e7fb;
+  margin:6px 0 0;
+  font-size:12px;
+}
+
+.camera-status{
+  padding:15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.camera-status strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:5px;
+}
+
+@media(max-width:950px){
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:44px 32px;
+  }
+
+  .hero-visual{
+    min-height:280px;
+  }
+
+  .dashboard-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .feature-row{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .feature-strip{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .feature-step:nth-child(2){
+    border-right:0;
+  }
+
+  .feature-step:nth-child(-n+2){
+    border-bottom:1px solid var(--line);
+  }
+
+  .grid.two{
+    grid-template-columns:1fr;
+  }
+
+  .scanner{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:620px){
+
+  .top{
+    height:68px;
+  }
+
+  .brand-name{
+    font-size:17px;
+  }
+
+  .brand-mark{
+    width:38px;
+    height:38px;
+  }
+
+  .role-pill{
+    display:none;
+  }
+
+  .hero{
+    margin-top:16px;
+    padding:34px 23px;
+    border-radius:22px;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+
+  .hero-visual{
+    min-height:230px;
+  }
+
+  .bus{
+    left:10px;
+    transform:scale(.78);
+    transform-origin:left bottom;
+  }
+
+  .qr-card{
+    right:0;
+    transform:scale(.8) rotate(4deg);
+  }
+
+  .coin{
+    right:20px;
+    transform:scale(.8);
+  }
+
+  .feature-strip{
+    grid-template-columns:1fr;
+  }
+
+  .feature-step{
+    border-right:0!important;
+    border-bottom:1px solid var(--line);
+  }
+
+  .feature-step:last-child{
+    border-bottom:0;
+  }
+
+  .dashboard-grid,
+  .feature-row,
+  .how,
+  .role-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid,
+  .bank-grid{
+    grid-template-columns:1fr;
+  }
+
+  .wallet-head{
+    flex-direction:column;
+  }
+
+  .wallet-balance{
+    width:100%;
+  }
+
+  .page-head{
+    flex-direction:column;
+  }
+
+  .row{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .auth{
+    padding:23px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div id="app"></div>
+
 <div id="toast" class="toast hidden"></div>
-<div id="modal" class="modal hidden" onclick="if(event.target.id==='modal')closeModal()"></div>
+
+<div
+  id="modal"
+  class="modal hidden"
+  onclick="if(event.target.id==='modal')closeModal()"
+></div>
+
 
 <script>
+
+/* =========================================================
+   SHUTLER MVP
+   Single-file deployable prototype
+   QR scanning fixed for real webcam/camera demo
+   ========================================================= */
+
 const APP_NAME="SHUTLER";
-const DB_KEY="shutler_mvp_v3_db";
-const SESSION_KEY="shutler_mvp_v3_session";
+
+const DB_KEY="shutler_mvp_v4_db";
+const SESSION_KEY="shutler_mvp_v4_session";
+
+
+/* =========================================================
+   DEMO DATABASE
+   ========================================================= */
+
 const seed={
+
   users:[
-    {id:"admin1",name:"FUTA Transport Admin",email:"admin@futa.shutler.demo",password:"admin123",role:"admin",school:"FUTA",status:"approved"},
-    {id:"stu1",name:"Joseph",email:"student@shutler.demo",password:"student123",role:"student",school:"FUTA",status:"approved",demoBalance:2000,credit:300},
-    {id:"drv1",name:"Adewale",email:"driver@shutler.demo",password:"driver123",role:"driver",school:"FUTA",status:"approved",demoBalance:4850},
-    {id:"drv2",name:"Emeka",email:"pending.driver@shutler.demo",password:"driver123",role:"driver",school:"FUTA",status:"pending",demoBalance:0}
+
+    {
+      id:"admin1",
+      name:"FUTA Transport Admin",
+      email:"admin@futa.shutler.demo",
+      password:"admin123",
+      role:"admin",
+      school:"FUTA",
+      status:"approved"
+    },
+
+    {
+      id:"stu1",
+      name:"Joseph",
+      email:"student@shutler.demo",
+      password:"student123",
+      role:"student",
+      school:"FUTA",
+      status:"approved",
+      demoBalance:2000,
+      credit:300
+    },
+
+    {
+      id:"drv1",
+      name:"Adewale",
+      email:"driver@shutler.demo",
+      password:"driver123",
+      role:"driver",
+      school:"FUTA",
+      status:"approved",
+      demoBalance:4850
+    },
+
+    {
+      id:"drv2",
+      name:"Emeka",
+      email:"pending.driver@shutler.demo",
+      password:"driver123",
+      role:"driver",
+      school:"FUTA",
+      status:"pending",
+      demoBalance:0
+    }
+
   ],
+
   claims:[
-    {id:"c1",studentId:"stu1",driverId:"drv1",amount:300,fare:200,paid:500,status:"confirmed",createdAt:"2026-09-29T11:42:00Z"}
+
+    {
+      id:"c1",
+      studentId:"stu1",
+      driverId:"drv1",
+      amount:300,
+      fare:200,
+      paid:500,
+      status:"confirmed",
+      createdAt:"2026-09-29T11:42:00Z"
+    }
+
   ],
+
   transactions:[
-    {id:"t1",userId:"stu1",type:"credit",amount:300,title:"Change credit received",detail:"Driver confirmed · Today, 12:42 PM",status:"confirmed",claimId:"c1"},
-    {id:"t2",userId:"stu1",type:"fare",amount:-200,title:"Ride payment",detail:"Approved shuttle · Today, 11:30 AM",status:"confirmed"}
+
+    {
+      id:"t1",
+      userId:"stu1",
+      type:"credit",
+      amount:300,
+      title:"Change credit received",
+      detail:"Driver confirmed · Today, 12:42 PM",
+      status:"confirmed",
+      claimId:"c1"
+    },
+
+    {
+      id:"t2",
+      userId:"stu1",
+      type:"fare",
+      amount:-200,
+      title:"Ride payment",
+      detail:"Approved shuttle · Today, 11:30 AM",
+      status:"confirmed"
+    }
+
   ],
+
   issues:[
-    {id:"i1",studentId:"stu1",title:"Fare / change dispute",text:"Demo issue: student reports that a confirmed change claim needs review.",status:"open",createdAt:"2026-09-29T12:50:00Z"}
+
+    {
+      id:"i1",
+      studentId:"stu1",
+      title:"Fare / change dispute",
+      text:"Demo issue: student reports that a confirmed change claim needs review.",
+      status:"open",
+      createdAt:"2026-09-29T12:50:00Z"
+    }
+
   ]
+
 };
 
-function clone(x){return JSON.parse(JSON.stringify(x))}
+
+/* =========================================================
+   BASIC UTILITIES
+   ========================================================= */
+
+function clone(x){
+  return JSON.parse(JSON.stringify(x));
+}
+
+
 function db(){
+
   const raw=localStorage.getItem(DB_KEY);
-  if(!raw){localStorage.setItem(DB_KEY,JSON.stringify(seed));return clone(seed)}
-  try{return JSON.parse(raw)}catch(e){localStorage.setItem(DB_KEY,JSON.stringify(seed));return clone(seed)}
+
+  if(!raw){
+
+    localStorage.setItem(
+      DB_KEY,
+      JSON.stringify(seed)
+    );
+
+    return clone(seed);
+  }
+
+  try{
+
+    return JSON.parse(raw);
+
+  }catch(e){
+
+    localStorage.setItem(
+      DB_KEY,
+      JSON.stringify(seed)
+    );
+
+    return clone(seed);
+  }
 }
-function save(x){localStorage.setItem(DB_KEY,JSON.stringify(x))}
+
+
+function save(x){
+
+  localStorage.setItem(
+    DB_KEY,
+    JSON.stringify(x)
+  );
+}
+
+
 function session(){
-  const id=localStorage.getItem(SESSION_KEY);
-  return id?db().users.find(u=>u.id===id)||null:null;
+
+  const id=localStorage.getItem(
+    SESSION_KEY
+  );
+
+  if(!id){
+    return null;
+  }
+
+  return db().users.find(
+    u=>u.id===id
+  )||null;
 }
-function setSession(id){localStorage.setItem(SESSION_KEY,id)}
-function esc(s){return String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]))}
-function money(n){return "₦"+Number(n||0).toLocaleString("en-NG")}
-function timeNow(){return new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}
+
+
+function setSession(id){
+
+  localStorage.setItem(
+    SESSION_KEY,
+    id
+  );
+}
+
+
+function esc(s){
+
+  return String(s??"").replace(
+    /[&<>'"]/g,
+    c=>({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      "'":"&#39;",
+      "\"":"&quot;"
+
+    }[c])
+  );
+
+}
+
+
+function money(n){
+
+  return "₦"+Number(
+    n||0
+  ).toLocaleString("en-NG");
+
+}
+
+
+function timeNow(){
+
+  return new Date().toLocaleTimeString(
+    [],
+    {
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
 function toast(msg){
-  const t=document.getElementById("toast");t.textContent=msg;t.classList.remove("hidden");
-  clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>t.classList.add("hidden"),2800);
+
+  const t=
+    document.getElementById("toast");
+
+  if(!t)return;
+
+  t.textContent=msg;
+
+  t.classList.remove(
+    "hidden"
+  );
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer=
+    setTimeout(
+      ()=>{
+        t.classList.add("hidden");
+      },
+      2800
+    );
 }
+
+
+/* =========================================================
+   CAMERA / QR SCANNER LIFECYCLE
+   ========================================================= */
+
+/*
+  This version returns a Promise so that another scanner
+  can wait until the previous camera is properly released.
+*/
+
 function stopScanner(){
-  const r=window.__qrReader;
+
+  const reader=
+    window.__qrReader;
+
   window.__qrReader=null;
-  if(r){try{r.stop().then(()=>r.clear()).catch(()=>{})}catch(e){}}
+
+  if(!reader){
+
+    return Promise.resolve();
+
+  }
+
+  return Promise.resolve()
+    .then(
+      ()=>reader.stop()
+    )
+    .catch(
+      ()=>{}
+    )
+    .then(
+      ()=>{
+        try{
+
+          return Promise.resolve(
+            reader.clear()
+          ).catch(
+            ()=>{}
+          );
+
+        }catch(e){
+
+          return Promise.resolve();
+
+        }
+      }
+    );
+
 }
-function loadScript(src,globalName){
-  if(window[globalName])return Promise.resolve(window[globalName]);
-  if(window.__scriptPromises?.[globalName])return window.__scriptPromises[globalName];
-  window.__scriptPromises=window.__scriptPromises||{};
-  window.__scriptPromises[globalName]=new Promise((resolve,reject)=>{
-    const existing=document.querySelector('script[data-lib="'+globalName+'"]');
-    if(existing){existing.addEventListener("load",()=>resolve(window[globalName]));existing.addEventListener("error",reject);return}
-    const s=document.createElement("script");s.src=src;s.async=true;s.dataset.lib=globalName;
-    s.onload=()=>window[globalName]?resolve(window[globalName]):reject(new Error("Library loaded but global was missing"));
-    s.onerror=()=>reject(new Error("Could not load "+globalName));
-    document.head.appendChild(s);
-  });
-  return window.__scriptPromises[globalName];
+
+
+/*
+  Dynamically load an external JavaScript library.
+*/
+
+function loadScript(
+  src,
+  globalName
+){
+
+  if(window[globalName]){
+
+    return Promise.resolve(
+      window[globalName]
+    );
+
+  }
+
+  if(
+    window.__scriptPromises?.[globalName]
+  ){
+
+    return window.__scriptPromises[
+      globalName
+    ];
+
+  }
+
+  window.__scriptPromises=
+    window.__scriptPromises||{};
+
+  window.__scriptPromises[
+    globalName
+  ]=
+    new Promise(
+      (resolve,reject)=>{
+
+        const existing=
+          document.querySelector(
+            'script[data-lib="'+
+            globalName+
+            '"]'
+          );
+
+        if(existing){
+
+          existing.addEventListener(
+            "load",
+            ()=>{
+              if(window[globalName]){
+                resolve(
+                  window[globalName]
+                );
+              }else{
+                reject(
+                  new Error(
+                    "Library global missing"
+                  )
+                );
+              }
+            }
+          );
+
+          existing.addEventListener(
+            "error",
+            reject
+          );
+
+          return;
+        }
+
+        const s=
+          document.createElement(
+            "script"
+          );
+
+        s.src=src;
+        s.async=true;
+        s.dataset.lib=globalName;
+
+        s.onload=()=>{
+
+          if(window[globalName]){
+
+            resolve(
+              window[globalName]
+            );
+
+          }else{
+
+            reject(
+              new Error(
+                "Library loaded but global was missing"
+              )
+            );
+
+          }
+
+        };
+
+        s.onerror=reject;
+
+        document.head.appendChild(s);
+
+      }
+    );
+
+  return window.__scriptPromises[
+    globalName
+  ];
+
 }
-async function ensureScannerLib(){return loadScript("https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js","Html5Qrcode")}
-async function ensureQRLib(){return loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js","QRCode")}
+
+
+/*
+  QR scanning library.
+*/
+
+async function ensureScannerLib(){
+
+  return loadScript(
+    "https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js",
+    "Html5Qrcode"
+  );
+
+}
+
+
+/*
+  QR generation library.
+*/
+
+async function ensureQRLib(){
+
+  return loadScript(
+    "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js",
+    "QRCode"
+  );
+
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 function logo(){
-  return `<svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-    <rect x="8" y="18" width="42" height="29" rx="8" fill="#1769ff"/>
-    <rect x="14" y="24" width="17" height="10" rx="2.5" fill="#dff0ff"/>
-    <rect x="34" y="24" width="10" height="10" rx="2.5" fill="#dff0ff"/>
-    <circle cx="18" cy="49" r="6" fill="#08264d"/><circle cx="43" cy="49" r="6" fill="#08264d"/>
-    <path d="M4 27H0M4 34H0M4 41H0" stroke="#1769ff" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="49" cy="16" r="11" fill="#13a05a" stroke="#fff" stroke-width="3"/>
-    <path d="M49 10v12M45 13h6M45 19h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-  </svg>`;
+
+  return `
+    <svg
+      class="brand-mark"
+      viewBox="0 0 64 64"
+      aria-hidden="true"
+    >
+
+      <rect
+        x="8"
+        y="18"
+        width="42"
+        height="29"
+        rx="8"
+        fill="#1769ff"
+      />
+
+      <rect
+        x="14"
+        y="24"
+        width="17"
+        height="10"
+        rx="2.5"
+        fill="#dff0ff"
+      />
+
+      <rect
+        x="34"
+        y="24"
+        width="10"
+        height="10"
+        rx="2.5"
+        fill="#dff0ff"
+      />
+
+      <circle
+        cx="18"
+        cy="49"
+        r="6"
+        fill="#08264d"
+      />
+
+      <circle
+        cx="43"
+        cy="49"
+        r="6"
+        fill="#08264d"
+      />
+
+      <path
+        d="M4 27H0M4 34H0M4 41H0"
+        stroke="#1769ff"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+
+      <circle
+        cx="49"
+        cy="16"
+        r="11"
+        fill="#13a05a"
+        stroke="#fff"
+        stroke-width="3"
+      />
+
+      <path
+        d="M49 10v12M45 13h6M45 19h6"
+        stroke="#fff"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+
+    </svg>
+  `;
+
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 function header(user){
-  return `<header class="top">
-    <button class="brand" onclick="${user?"render()":"goHome()"}" aria-label="SHUTLER home">
-      ${logo()}<span><span class="brand-name">SHUTLER</span><span class="brand-tag">TAP · SCAN · GET YOUR CHANGE</span></span>
-    </button>
-    ${user?`<div class="top-actions"><span class="role-pill">${esc(user.school)} · ${esc(user.role)}</span><span class="avatar">${esc((user.name||"U").charAt(0).toUpperCase())}</span><button class="btn outline" onclick="logout()">Sign out</button></div>`:""}
-  </header>`;
+
+  return `
+    <header class="top">
+
+      <button
+        class="brand"
+        onclick="${user?"render()":"goHome()"}"
+        aria-label="SHUTLER home"
+      >
+
+        ${logo()}
+
+        <span>
+
+          <span class="brand-name">
+            SHUTLER
+          </span>
+
+          <span class="brand-tag">
+            TAP · SCAN · GET YOUR CHANGE
+          </span>
+
+        </span>
+
+      </button>
+
+
+      ${
+        user
+        ?
+        `
+        <div class="top-actions">
+
+          <span class="role-pill">
+            ${esc(user.school)}
+            ·
+            ${esc(user.role)}
+          </span>
+
+          <span class="avatar">
+            ${esc(
+              (user.name||"U")
+              .charAt(0)
+              .toUpperCase()
+            )}
+          </span>
+
+          <button
+            class="btn outline"
+            onclick="logout()"
+          >
+            Sign out
+          </button>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+    </header>
+  `;
+
 }
-function goHome(){stopScanner();render()}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function goHome(){
+
+  stopScanner();
+
+  render();
+
+}
+
+
+/* =========================================================
+   LANDING PAGE
+   ========================================================= */
+
 function landing(){
-  return `${header(null)}
-  <main class="shell">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Campus change credit </div>
-        <h1>Less hassle.<br><span>More rides.</span><br>Real change.</h1>
-        <p>SHUTLER helps students record cash change owed on campus shuttle rides, get the claim confirmed by the driver, and carry the confirmed credit to a future approved ride.</p>
-        <div class="hero-actions">
-          <button class="btn blue" onclick="showAuth('signup')">Create account →</button>
-          <button class="btn outline" onclick="showAuth('login')">Sign in</button>
+
+  return `
+
+    ${header(null)}
+
+    <main class="shell">
+
+      <section class="hero">
+
+        <div>
+
+          <div class="eyebrow">
+            Campus change credit
+          </div>
+
+          <h1>
+            Less hassle.<br>
+            <span>More rides.</span><br>
+            Real change.
+          </h1>
+
+          <p>
+            SHUTLER helps students record cash change owed
+            on campus shuttle rides, get the claim confirmed
+            by the driver, and carry the confirmed credit to
+            a future approved ride.
+          </p>
+
+          <div class="hero-actions">
+
+            <button
+              class="btn blue"
+              onclick="showAuth('signup')"
+            >
+              Create account →
+            </button>
+
+            <button
+              class="btn outline"
+              onclick="showAuth('login')"
+            >
+              Sign in
+            </button>
+
+          </div>
+
         </div>
-      </div>
-      <div class="hero-visual">
-        <div class="bus-scene">
-          <div class="bus"><div class="bus-window"></div><div class="wheel one"></div><div class="wheel two"></div></div>
-          <div class="coin">₦</div>
-          <div class="qr-card"><div class="fake-qr"></div><div class="qr-label">SCAN · CLAIM · RIDE</div></div>
+
+
+        <div class="hero-visual">
+
+          <div class="bus-scene">
+
+            <div class="bus">
+
+              <div class="bus-window"></div>
+
+              <div class="wheel one"></div>
+
+              <div class="wheel two"></div>
+
+            </div>
+
+
+            <div class="coin">
+              ₦
+            </div>
+
+
+            <div class="qr-card">
+
+              <div class="fake-qr"></div>
+
+              <div class="qr-label">
+                SCAN · CLAIM · RIDE
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
+
+      </section>
+
+
+      <section class="feature-strip">
+
+        <div class="feature-step">
+
+          <div class="step-icon">
+            ⌗
+          </div>
+
+          <div>
+            <strong>
+              Scan QR
+            </strong>
+
+            <span>
+              Identify the approved driver.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="feature-step">
+
+          <div class="step-icon">
+            ₦
+          </div>
+
+          <div>
+            <strong>
+              Request change
+            </strong>
+
+            <span>
+              Enter fare and amount paid.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="feature-step">
+
+          <div class="step-icon">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Get confirmed
+            </strong>
+
+            <span>
+              Driver verifies the claim.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="feature-step">
+
+          <div class="step-icon">
+            ↗
+          </div>
+
+          <div>
+            <strong>
+              Use your credit
+            </strong>
+
+            <span>
+              Carry confirmed credit forward.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="pitch-banner">
+
+        <div>
+
+          <strong>
+            One simple accountability layer for
+            campus shuttle change.
+          </strong>
+
+          <p>
+            Cash stays cash. SHUTLER records what is owed
+            and makes the claim visible to both sides.
+          </p>
+
+        </div>
+
+        <button
+          class="btn green"
+          onclick="showAuth('signup')"
+        >
+          Start demo
+        </button>
+
       </div>
-    </section>
 
-    <section class="feature-strip">
-      <div class="feature-step"><div class="step-icon">⌗</div><div><strong>Scan QR</strong><span>Identify the approved driver.</span></div></div>
-      <div class="feature-step"><div class="step-icon">₦</div><div><strong>Request change</strong><span>Enter fare and amount paid.</span></div></div>
-      <div class="feature-step"><div class="step-icon">✓</div><div><strong>Get confirmed</strong><span>Driver verifies the claim.</span></div></div>
-      <div class="feature-step"><div class="step-icon">↗</div><div><strong>Use your credit</strong><span>Carry confirmed credit forward.</span></div></div>
-    </section>
 
-    <div class="pitch-banner">
-      <div><strong>One simple accountability layer for campus shuttle change.</strong><p>Cash stays cash. SHUTLER records what is owed and makes the claim visible to both sides.</p></div>
-      <button class="btn green" onclick="showAuth('signup')">Start demo</button>
-    </div>
+      <section class="card">
 
-    <section class="card">
-      <div class="eyebrow">How SHUTLER works</div>
-      <h2>From cash problem to confirmed credit.</h2>
-      <div class="how">
-        <div class="how-item"><div class="how-num">1</div><strong>Identify</strong><p class="small muted">Student scans the driver's SHUTLER QR to identify the approved shuttle driver.</p></div>
-        <div class="how-item"><div class="how-num">2</div><strong>Record</strong><p class="small muted">Student enters the fare and amount paid. SHUTLER calculates the change owed.</p></div>
-        <div class="how-item"><div class="how-num">3</div><strong>Confirm & carry</strong><p class="small muted">Driver confirms the claim. The credit becomes available for a future approved ride.</p></div>
+        <div class="eyebrow">
+          How SHUTLER works
+        </div>
+
+        <h2>
+          From cash problem to confirmed credit.
+        </h2>
+
+
+        <div class="how">
+
+          <div class="how-item">
+
+            <div class="how-num">
+              1
+            </div>
+
+            <strong>
+              Identify
+            </strong>
+
+            <p class="small muted">
+              Student scans the driver's SHUTLER QR
+              to identify the approved shuttle driver.
+            </p>
+
+          </div>
+
+
+          <div class="how-item">
+
+            <div class="how-num">
+              2
+            </div>
+
+            <strong>
+              Record
+            </strong>
+
+            <p class="small muted">
+              Student enters the fare and amount paid.
+              SHUTLER calculates the change owed.
+            </p>
+
+          </div>
+
+
+          <div class="how-item">
+
+            <div class="how-num">
+              3
+            </div>
+
+            <strong>
+              Confirm & carry
+            </strong>
+
+            <p class="small muted">
+              Driver confirms the claim. The credit becomes
+              available for a future approved ride.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="footer">
+
+        <strong>
+          SHUTLER
+        </strong>
+
+        · Campus Change Credit
+
       </div>
-    </section>
-    <div class="footer"><strong>SHUTLER</strong> · Campus Change Credit · </div>
-  </main>`;
+
+    </main>
+  `;
+
 }
 
-function auth(mode="signup",role="student"){
-  return `${header(null)}<main class="shell auth-wrap"><div class="card auth">
-    <div class="eyebrow">SHUTLER · FUTA</div>
-    <h2>${mode==="signup"?"Create your account":"Welcome back"}</h2>
-    <p class="muted">${mode==="signup"?"Choose your role and enter the demo.":"Use a demo account or an account you created."}</p>
-    ${mode==="signup"?signupForm(role):loginForm()}
-    <div style="margin-top:15px;text-align:center"><button class="btn outline" onclick="showAuth('${mode==="signup"?"login":"signup"}')">${mode==="signup"?"Already have an account? Sign in":"Need an account? Create one"}</button></div>
-  </div></main>`;
+
+/* =========================================================
+   AUTH
+   ========================================================= */
+
+function auth(
+  mode="signup",
+  role="student"
+){
+
+  return `
+
+    ${header(null)}
+
+    <main class="shell auth-wrap">
+
+      <div class="card auth">
+
+        <div class="eyebrow">
+          SHUTLER · FUTA
+        </div>
+
+        <h2>
+          ${
+            mode==="signup"
+            ?
+            "Create account"
+            :
+            "Welcome back"
+          }
+        </h2>
+
+        <p class="muted">
+
+          ${
+            mode==="signup"
+            ?
+            "Choose your role and enter the demo."
+            :
+            "Use a demo account or an account you created."
+          }
+
+        </p>
+
+
+        ${
+          mode==="signup"
+          ?
+          signupForm(role)
+          :
+          loginForm()
+        }
+
+
+        <div
+          style="margin-top:15px;text-align:center"
+        >
+
+          <button
+            class="btn outline"
+            onclick="
+              showAuth(
+                '${mode==="signup"?"login":"signup"}'
+              )
+            "
+          >
+
+            ${
+              mode==="signup"
+              ?
+              "Already have an account? Sign in"
+              :
+              "Need an account? Create one"
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  `;
+
 }
+
+
 function signupForm(role){
-  return `<form onsubmit="createAccount(event)">
-    <label>Full name<input id="name" required placeholder="e.g. Joseph Matthew"></label>
-    <label>Email<input id="email" type="email" required placeholder="you@example.com"></label>
-    <label>Password<input id="password" type="password" minlength="6" required></label>
-    <label>Account type</label>
-    <div class="role-grid">${[
-      ["student","Student","Pay fares & manage credits"],
-      ["driver","Driver","Confirm change claims"],
-      ["admin","Admin","Manage transport operations"]
-    ].map(([r,t,d])=>`<label class="role-card ${role===r?"selected":""}"><input type="radio" name="role" value="${r}" ${role===r?"checked":""} onchange="refreshAuthRole()"><strong>${t}</strong><span>${d}</span></label>`).join("")}</div>
-    <div id="roleFields">${roleFields(role)}</div>
-    <button class="btn primary" type="submit">Create ${role} account →</button>
-    <div class="helper"><b>Demo protection:</b> new driver accounts require FUTA admin approval. Admin creation requires the demo access code.</div>
-  </form>`;
+
+  return `
+
+    <form onsubmit="createAccount(event)">
+
+      <label>
+
+        Full name
+
+        <input
+          id="name"
+          required
+          placeholder="e.g. Joseph Matthew"
+        >
+
+      </label>
+
+
+      <label>
+
+        Email
+
+        <input
+          id="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+        >
+
+      </label>
+
+
+      <label>
+
+        Password
+
+        <input
+          id="password"
+          type="password"
+          minlength="6"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Account type
+      </label>
+
+
+      <div class="role-grid">
+
+        ${
+          [
+            [
+              "student",
+              "Student",
+              "Pay fares & manage credits"
+            ],
+            [
+              "driver",
+              "Driver",
+              "Confirm change claims"
+            ],
+            [
+              "admin",
+              "Admin",
+              "Manage transport operations"
+            ]
+          ]
+          .map(
+            ([r,t,d])=>`
+
+              <label
+                class="role-card ${
+                  role===r
+                  ?
+                  "selected"
+                  :
+                  ""
+                }"
+              >
+
+                <input
+                  type="radio"
+                  name="role"
+                  value="${r}"
+                  ${
+                    role===r
+                    ?
+                    "checked"
+                    :
+                    ""
+                  }
+                  onchange="refreshAuthRole()"
+                >
+
+                <strong>
+                  ${t}
+                </strong>
+
+                <span>
+                  ${d}
+                </span>
+
+              </label>
+
+            `
+          )
+          .join("")
+        }
+
+      </div>
+
+
+      <div id="roleFields">
+        ${roleFields(role)}
+      </div>
+
+
+      <button
+        class="btn primary"
+        type="submit"
+      >
+        Create account →
+      </button>
+
+
+      <div class="helper">
+
+        <b>
+          Demo protection:
+        </b>
+
+        New driver accounts require FUTA admin approval.
+
+        Admin creation requires the demo access code.
+
+      </div>
+
+    </form>
+
+  `;
+
 }
+
+
 function roleFields(role){
-  if(role==="driver")return `<label>School<select id="school"><option value="FUTA">FUTA</option></select></label><div class="notice">Driver accounts start as <b>pending</b> until the transport admin approves them.</div>`;
-  if(role==="admin")return `<label>School<select id="school"><option value="FUTA">FUTA</option></select></label><label>Admin access code<input id="adminCode" placeholder="Demo: FUTA-ADMIN"></label>`;
-  return `<label>School<select id="school"><option value="FUTA">FUTA</option></select></label>`;
+
+  if(role==="driver"){
+
+    return `
+
+      <label>
+
+        School
+
+        <select id="school">
+          <option value="FUTA">
+            FUTA
+          </option>
+        </select>
+
+      </label>
+
+
+      <div class="notice">
+
+        Driver accounts start as
+        <b>pending</b>
+        until the transport admin approves them.
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(role==="admin"){
+
+    return `
+
+      <label>
+
+        School
+
+        <select id="school">
+          <option value="FUTA">
+            FUTA
+          </option>
+        </select>
+
+      </label>
+
+
+      <label>
+
+        Admin access code
+
+        <input
+          id="adminCode"
+          placeholder="Demo: FUTA-ADMIN"
+        >
+
+      </label>
+
+    `;
+
+  }
+
+
+  return `
+
+    <label>
+
+      School
+
+      <select id="school">
+
+        <option value="FUTA">
+          FUTA
+        </option>
+
+      </select>
+
+    </label>
+
+  `;
+
 }
+
+
 function refreshAuthRole(){
-  const checked=document.querySelector('input[name="role"]:checked');if(!checked)return;
-  const r=checked.value;const fields=document.getElementById("roleFields");if(fields)fields.innerHTML=roleFields(r);
-  document.querySelectorAll(".role-card").forEach(x=>x.classList.remove("selected"));
-  checked.parentElement.classList.add("selected");
+
+  const checked=
+    document.querySelector(
+      'input[name="role"]:checked'
+    );
+
+  if(!checked)return;
+
+  const r=checked.value;
+
+  const fields=
+    document.getElementById(
+      "roleFields"
+    );
+
+  if(fields){
+
+    fields.innerHTML=
+      roleFields(r);
+
+  }
+
+  document
+    .querySelectorAll(".role-card")
+    .forEach(
+      x=>x.classList.remove(
+        "selected"
+      )
+    );
+
+  checked.parentElement.classList.add(
+    "selected"
+  );
+
 }
+
+
 function loginForm(){
-  return `<form onsubmit="doLogin(event)">
-    <label>Email<input id="loginEmail" type="email" required placeholder="student@shutler.demo"></label>
-    <label>Password<input id="loginPassword" type="password" required placeholder="••••••••"></label>
-    <button class="btn primary" type="submit">Sign in →</button>
-    <div class="helper"><b>Demo accounts</b><br>
-      Student: student@shutler.demo / student123<br>
-      Driver: driver@shutler.demo / driver123<br>
-      Admin: admin@futa.shutler.demo / admin123
-    </div>
-  </form>`;
+
+  return `
+
+    <form onsubmit="doLogin(event)">
+
+      <label>
+
+        Email
+
+        <input
+          id="loginEmail"
+          type="email"
+          required
+          placeholder="student@shutler.demo"
+        >
+
+      </label>
+
+
+      <label>
+
+        Password
+
+        <input
+          id="loginPassword"
+          type="password"
+          required
+          placeholder="••••••••"
+        >
+
+      </label>
+
+
+      <button
+        class="btn primary"
+        type="submit"
+      >
+        Sign in →
+      </button>
+
+
+      <div class="helper">
+
+        <b>
+          Demo accounts
+        </b>
+
+        <br>
+
+        Student:
+        student@shutler.demo /
+        student123
+
+        <br>
+
+        Driver:
+        driver@shutler.demo /
+        driver123
+
+        <br>
+
+        Admin:
+        admin@futa.shutler.demo /
+        admin123
+
+      </div>
+
+    </form>
+
+  `;
+
 }
+
+
+/* =========================================================
+   ACCOUNT CREATION
+   ========================================================= */
+
 function createAccount(e){
-  e.preventDefault();const f=e.target;const checked=f.querySelector('input[name="role"]:checked');if(!checked)return toast("Choose an account type.");
-  const r=checked.value,d=db(),email=f.querySelector("#email").value.trim().toLowerCase();
-  if(d.users.some(u=>u.email===email))return toast("An account with that email already exists.");
-  if(r==="admin"&&f.querySelector("#adminCode")?.value!=="FUTA-ADMIN")return toast("Invalid admin access code.");
-  const school=f.querySelector("#school")?.value||"FUTA";
-  const u={id:r[0]+Date.now(),name:f.querySelector("#name").value.trim(),email,password:f.querySelector("#password").value,role:r,school,status:r==="driver"?"pending":"approved",demoBalance:r==="student"?2000:r==="driver"?4850:0,credit:0};
-  d.users.push(u);save(d);setSession(u.id);toast(r==="driver"?"Account created — waiting for FUTA admin approval.":"Account created.");render();
+
+  e.preventDefault();
+
+  const f=e.target;
+
+  const checked=
+    f.querySelector(
+      'input[name="role"]:checked'
+    );
+
+  if(!checked){
+
+    return toast(
+      "Choose an account type."
+    );
+
+  }
+
+  const r=checked.value;
+
+  const d=db();
+
+  const email=
+    f.querySelector(
+      "#email"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  if(
+    d.users.some(
+      u=>u.email===email
+    )
+  ){
+
+    return toast(
+      "An account with that email already exists."
+    );
+
+  }
+
+
+  if(
+    r==="admin" &&
+    f.querySelector(
+      "#adminCode"
+    )?.value!=="FUTA-ADMIN"
+  ){
+
+    return toast(
+      "Invalid admin access code."
+    );
+
+  }
+
+
+  const school=
+    f.querySelector(
+      "#school"
+    )?.value||"FUTA";
+
+
+  const u={
+
+    id:r[0]+Date.now(),
+
+    name:
+      f.querySelector(
+        "#name"
+      ).value.trim(),
+
+    email,
+
+    password:
+      f.querySelector(
+        "#password"
+      ).value,
+
+    role:r,
+
+    school,
+
+    status:
+      r==="driver"
+      ?
+      "pending"
+      :
+      "approved",
+
+    demoBalance:
+      r==="student"
+      ?
+      2000
+      :
+      r==="driver"
+      ?
+      4850
+      :
+      0,
+
+    credit:0
+
+  };
+
+
+  d.users.push(u);
+
+  save(d);
+
+  setSession(u.id);
+
+  toast(
+    r==="driver"
+    ?
+    "Account created — waiting for FUTA admin approval."
+    :
+    "Account created."
+  );
+
+  render();
+
 }
+
+
+/* =========================================================
+   LOGIN / LOGOUT
+   ========================================================= */
+
 function doLogin(e){
-  e.preventDefault();const d=db(),email=document.getElementById("loginEmail").value.trim().toLowerCase(),p=document.getElementById("loginPassword").value;
-  const u=d.users.find(x=>x.email===email&&x.password===p);if(!u)return toast("Invalid email or password.");
-  setSession(u.id);toast("Signed in.");render();
+
+  e.preventDefault();
+
+  const d=db();
+
+  const email=
+    document.getElementById(
+      "loginEmail"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+  const p=
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+
+  const u=
+    d.users.find(
+      x=>
+        x.email===email &&
+        x.password===p
+    );
+
+
+  if(!u){
+
+    return toast(
+      "Invalid email or password."
+    );
+
+  }
+
+
+  setSession(u.id);
+
+  toast(
+    "Signed in."
+  );
+
+  render();
+
 }
-function logout(){stopScanner();localStorage.removeItem(SESSION_KEY);render()}
-function resetDemo(){stopScanner();localStorage.setItem(DB_KEY,JSON.stringify(seed));localStorage.removeItem(SESSION_KEY);render();toast("Demo data reset.")}
-function roleTabs(active){
-  return `<div class="role-tabs">
-    <button class="role-tab ${active==="student"?"active":""}" onclick="switchRolePreview('student')">Student</button>
-    <button class="role-tab ${active==="driver"?"active":""}" onclick="switchRolePreview('driver')">Driver</button>
-    <button class="role-tab ${active==="admin"?"active":""}" onclick="switchRolePreview('admin')">Admin</button>
-  </div>`;
+
+
+function logout(){
+
+  stopScanner();
+
+  localStorage.removeItem(
+    SESSION_KEY
+  );
+
+  render();
+
 }
-function switchRolePreview(role){toast("Role previews are available after signing in with the matching demo account.")}
+
+
+function resetDemo(){
+
+  stopScanner();
+
+  localStorage.setItem(
+    DB_KEY,
+    JSON.stringify(seed)
+  );
+
+  localStorage.removeItem(
+    SESSION_KEY
+  );
+
+  render();
+
+  toast(
+    "Demo data reset."
+  );
+
+}
+
+
+/* =========================================================
+   APP NAVIGATION
+   ========================================================= */
+
 function appNav(role){
-  return `<div class="small muted" style="margin-top:18px">SHUTLER · ${esc(role)} workspace</div>`;
+
+  return `
+
+    <div
+      class="small muted"
+      style="margin-top:18px"
+    >
+      SHUTLER · ${esc(role)} workspace
+    </div>
+
+  `;
+
 }
+
+
+/* =========================================================
+   STUDENT DASHBOARD
+   ========================================================= */
+
 function student(user){
-  const d=db(),claims=d.claims.filter(c=>c.studentId===user.id).slice().reverse(),tx=d.transactions.filter(t=>t.userId===user.id).slice().reverse();
-  const pending=claims.filter(c=>c.status==="pending").length;
-  return `${header(user)}<main class="shell">
-    ${appNav("student")}
-    <div class="page-head"><div><div class="eyebrow">Student dashboard</div><h2>Good afternoon, ${esc(user.name)}.</h2><p class="muted">Your campus transport activity, change claims and confirmed credit in one place.</p></div><button class="btn blue" onclick="studentAction('scan')">Scan a driver QR →</button></div>
-    <div class="dashboard-grid">
-      <div class="stat"><div class="label">Available credit</div><div class="value money-green">${money(user.credit)}</div></div>
-      <div class="stat"><div class="label">Wallet balance</div><div class="value">${money(user.demoBalance)}</div></div>
-      <div class="stat"><div class="label">Pending claims</div><div class="value">${pending}</div></div>
-      <div class="stat"><div class="label">Total claims</div><div class="value">${claims.length}</div></div>
-    </div>
-    <div class="feature-row">
-      <button class="feature" onclick="studentAction('scan')"><div class="icon">⌗</div><strong>Scan QR</strong><span>Identify an approved driver.</span></button>
-      <button class="feature" onclick="studentAction('change')"><div class="icon">₦</div><strong>Request change</strong><span>Record cash change owed.</span></button>
-      <button class="feature" onclick="studentAction('useCredit')"><div class="icon">↗</div><strong>Use credit</strong><span>Apply confirmed credit to a ride.</span></button>
-      <button class="feature" onclick="studentAction('wallet')"><div class="icon">+</div><strong>Fund wallet</strong><span>Simulate wallet funding.</span></button>
-    </div>
-    <div id="studentAction">${studentScan(user)}</div>
-    <div class="grid two">
-      <div class="card credit-card"><div class="eyebrow" style="color:#9dcbff">Confirmed change credit</div><h3>Carry your credit forward</h3><div class="credit">${money(user.credit)}</div><div class="muted">Available for a future approved campus ride.</div><div class="timeline"><div class="step done"></div><div class="step ${pending?"":"done"}"></div><div class="step ${user.credit>0?"done":""}"></div></div><div class="timeline-labels"><span>Claimed</span><span>Confirmed</span><span>Usable</span></div></div>
-      <div class="card"><div class="eyebrow">Recent activity</div><h3>Transactions</h3><div class="list">${tx.length?tx.slice(0,5).map(t=>transactionRow(t)).join(""):'<div class="empty">No transactions yet.</div>'}</div></div>
-    </div>
-    <div class="card"><div class="eyebrow">Claims</div><h3>My change claims</h3><div class="list">${claims.length?claims.map(c=>claimRow(c,d)).join(""):'<div class="empty">No change claims yet.</div>'}</div></div>
-    <div class="footer"><strong>SHUTLER</strong> · Your change, made visible.</div>
-  </main>`;
+
+  const d=db();
+
+  const claims=
+    d.claims
+    .filter(
+      c=>c.studentId===user.id
+    )
+    .slice()
+    .reverse();
+
+  const tx=
+    d.transactions
+    .filter(
+      t=>t.userId===user.id
+    )
+    .slice()
+    .reverse();
+
+  const pending=
+    claims.filter(
+      c=>c.status==="pending"
+    ).length;
+
+
+  return `
+
+    ${header(user)}
+
+    <main class="shell">
+
+      ${appNav("student")}
+
+
+      <div class="page-head">
+
+        <div>
+
+          <div class="eyebrow">
+            Student dashboard
+          </div>
+
+          <h2>
+            Good afternoon,
+            ${esc(user.name)}.
+          </h2>
+
+          <p class="muted">
+            Your campus transport activity,
+            change claims and confirmed credit
+            in one place.
+          </p>
+
+        </div>
+
+
+        <button
+          class="btn blue"
+          onclick="studentAction('scan')"
+        >
+          Scan a driver QR →
+        </button>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+        <div class="stat">
+
+          <div class="label">
+            Available credit
+          </div>
+
+          <div class="value money-green">
+            ${money(user.credit)}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Wallet balance
+          </div>
+
+          <div class="value">
+            ${money(user.demoBalance)}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Pending claims
+          </div>
+
+          <div class="value">
+            ${pending}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Total claims
+          </div>
+
+          <div class="value">
+            ${claims.length}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="feature-row">
+
+        <button
+          class="feature"
+          onclick="studentAction('scan')"
+        >
+
+          <div class="icon">
+            ⌗
+          </div>
+
+          <strong>
+            Scan QR
+          </strong>
+
+          <span>
+            Identify an approved driver.
+          </span>
+
+        </button>
+
+
+        <button
+          class="feature"
+          onclick="studentAction('change')"
+        >
+
+          <div class="icon">
+            ₦
+          </div>
+
+          <strong>
+            Request change
+          </strong>
+
+          <span>
+            Record cash change owed.
+          </span>
+
+        </button>
+
+
+        <button
+          class="feature"
+          onclick="studentAction('useCredit')"
+        >
+
+          <div class="icon">
+            ↗
+          </div>
+
+          <strong>
+            Use credit
+          </strong>
+
+          <span>
+            Apply confirmed credit to a ride.
+          </span>
+
+        </button>
+
+
+        <button
+          class="feature"
+          onclick="studentAction('wallet')"
+        >
+
+          <div class="icon">
+            +
+          </div>
+
+          <strong>
+            Fund wallet
+          </strong>
+
+          <span>
+            Simulate wallet funding.
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <div id="studentAction">
+        ${studentScan(user)}
+      </div>
+
+
+      <div class="grid two">
+
+        <div class="card credit-card">
+
+          <div
+            class="eyebrow"
+            style="color:#9dcbff"
+          >
+            Confirmed change credit
+          </div>
+
+          <h3>
+            Carry your credit forward
+          </h3>
+
+          <div class="credit">
+            ${money(user.credit)}
+          </div>
+
+          <div class="muted">
+            Available for a future approved campus ride.
+          </div>
+
+
+          <div class="timeline">
+
+            <div class="step done"></div>
+
+            <div
+              class="step ${
+                pending
+                ?
+                ""
+                :
+                "done"
+              }"
+            ></div>
+
+            <div
+              class="step ${
+                user.credit>0
+                ?
+                "done"
+                :
+                ""
+              }"
+            ></div>
+
+          </div>
+
+
+          <div class="timeline-labels">
+
+            <span>
+              Claimed
+            </span>
+
+            <span>
+              Confirmed
+            </span>
+
+            <span>
+              Usable
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="eyebrow">
+            Recent activity
+          </div>
+
+          <h3>
+            Transactions
+          </h3>
+
+          <div class="list">
+
+            ${
+              tx.length
+              ?
+              tx.slice(0,5)
+                .map(
+                  t=>transactionRow(t)
+                )
+                .join("")
+              :
+              `
+                <div class="empty">
+                  No transactions yet.
+                </div>
+              `
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="eyebrow">
+          Claims
+        </div>
+
+        <h3>
+          My change claims
+        </h3>
+
+
+        <div class="list">
+
+          ${
+            claims.length
+            ?
+            claims
+              .map(
+                c=>claimRow(c,d)
+              )
+              .join("")
+            :
+            `
+              <div class="empty">
+                No change claims yet.
+              </div>
+            `
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="footer">
+
+        <strong>
+          SHUTLER
+        </strong>
+
+        · Your change, made visible.
+
+      </div>
+
+    </main>
+
+  `;
+
 }
+
+
 function transactionRow(t){
-  const positive=Number(t.amount)>=0;
-  return `<div class="row"><div class="row-main"><div class="row-title">${esc(t.title)}</div><div class="row-sub">${esc(t.detail||"SHUTLER transaction")}</div></div><strong class="${positive?"money-green":"money-red"}">${positive?"+":""}${money(t.amount)}</strong></div>`;
-}
-function claimRow(c,d){
-  const dr=d.users.find(u=>u.id===c.driverId);
-  return `<div class="row"><div class="row-main"><div class="row-title">${money(c.amount)} change · ${esc(dr?.name||"Driver")}</div><div class="row-sub">Fare ${money(c.fare)} · Paid ${money(c.paid)}</div></div><span class="badge ${c.status}">${esc(c.status)}</span></div>`;
-}
-function studentScan(user){
-  return `<div class="card"><div class="eyebrow">Identify your shuttle</div><h3>Scan driver's SHUTLER QR</h3><p class="muted">The QR links this claim to an approved driver. For the presentation, you can use the demo scan even if camera access is unavailable.</p>
-    <div class="scanner"><div class="scanner-box" id="reader"><div class="muted small">Camera scanner is ready when you tap “Use camera”.</div></div>
-      <div><div id="selectedDriver" class="driver-card"><b>No driver selected</b><div class="small muted" style="margin-top:5px">Choose camera scan or the demo scan.</div></div>
-      <button class="btn blue" style="margin-top:12px;width:100%" onclick="demoScan()">Demo scan approved driver</button>
-      <button class="btn outline" style="margin-top:8px;width:100%" onclick="startScanner()">Use camera</button></div>
-    </div></div>`;
-}
-function studentChange(user,driverId){
-  const d=db(),drivers=d.users.filter(u=>u.role==="driver"&&u.school===user.school&&u.status==="approved");
-  return `<div class="card"><div class="eyebrow">Change claim</div><h3>Record the cash transaction</h3><p class="muted">SHUTLER calculates the exact change owed from the fare and amount paid.</p>
-    <form onsubmit="submitClaim(event)"><input type="hidden" id="claimDriver" value="${esc(driverId||"")}">
-      <label>Approved driver<select id="driverSelect" onchange="document.getElementById('claimDriver').value=this.value"><option value="">Select driver</option>${drivers.map(x=>`<option value="${esc(x.id)}" ${x.id===driverId?"selected":""}>${esc(x.name)} · ${esc(x.school)}</option>`).join("")}</select></label>
-      <div class="form-grid"><label>Fare<input id="fare" type="number" min="1" required placeholder="200"></label><label>Amount paid<input id="paid" type="number" min="1" required placeholder="500"></label></div>
-      <div id="changePreview" class="notice">Change owed: ₦0</div>
-      <button class="btn primary" type="submit">Send claim to driver →</button>
-    </form></div>`;
-}
-function studentUseCredit(user){
-  const d=db(),drivers=d.users.filter(u=>u.role==="driver"&&u.school===user.school&&u.status==="approved");
-  return `<div class="card"><div class="eyebrow">Use confirmed credit</div><h3>Apply credit to a future ride</h3><p class="muted">This demo lets you simulate using confirmed SHUTLER credit toward an approved ride.</p>
-    <div class="wallet-balance" style="margin:12px 0"><span>Available change credit</span><strong>${money(user.credit)}</strong></div>
-    <form onsubmit="useCredit(event)"><label>Approved driver<select id="useDriver"><option value="">Select driver</option>${drivers.map(x=>`<option value="${esc(x.id)}">${esc(x.name)} · ${esc(x.school)}</option>`).join("")}</select></label>
-    <label>Ride fare<input id="useAmount" type="number" min="1" required placeholder="200"></label>
-    <div class="notice">Credit available: <b>${money(user.credit)}</b>. The demo will deduct only the amount of credit used.</div>
-    <button class="btn green" type="submit" ${user.credit<=0?"disabled":""}>Apply credit to ride →</button></form></div>`;
-}
-function studentWallet(user){
-  return `<div class="card wallet-card"><div class="eyebrow">Demo wallet</div><div class="wallet-head"><div><h3>Fund your SHUTLER wallet</h3><p class="muted">This is a presentation-only simulation of wallet funding. No real money moves.</p></div><div class="wallet-balance"><span>Current balance</span><strong>${money(user.demoBalance)}</strong></div></div>
-    <div class="bank-transfer"><strong>Bank transfer simulation</strong><p class="small muted">In a production version, this step would connect to a payment provider.</p>
-      <div class="bank-grid"><div><span>Bank</span><strong>SHUTLER Demo Bank</strong></div><div><span>Account name</span><strong>${esc(user.name)} · SHUTLER Wallet</strong></div><div><span>Account number</span><strong>0123456789</strong></div></div>
-      <div class="notice">Demo only — no real money is transferred.</div><button class="btn green" onclick="fundDemoWallet(1000)">Add ₦1,000 demo funds</button>
-    </div></div>`;
-}
-function studentIssue(user){
-  const d=db(),tx=d.transactions.filter(t=>t.userId===user.id);
-  return `<div class="card"><div class="eyebrow">Support</div><h3>Report a transaction issue</h3><p class="muted">Report a disputed fare, wrong credit, or driver confirmation issue.</p><form onsubmit="submitIssue(event)">
-    <label>Transaction<select id="issueTx">${tx.length?tx.map(t=>`<option value="${esc(t.id)}">${esc(t.title)} · ${money(t.amount)}</option>`).join(""):'<option>No transactions available</option>'}</select></label>
-    <label>What happened?<textarea id="issueText" rows="4" required placeholder="Explain the issue briefly..."></textarea></label>
-    <button class="btn primary" type="submit">Send to transport admin →</button></form></div>`;
-}
-function studentAction(type){
-  stopScanner();const u=session();if(!u)return;
-  const host=document.getElementById("studentAction");if(!host)return;
-  if(type==="scan"){host.innerHTML=studentScan(u);window.__selectedDriver="";return}
-  if(type==="change"){host.innerHTML=studentChange(u,window.__selectedDriver||"");setTimeout(updatePreview,20);return}
-  if(type==="useCredit"){host.innerHTML=studentUseCredit(u);return}
-  if(type==="wallet"){host.innerHTML=studentWallet(u);return}
-  if(type==="issue"){host.innerHTML=studentIssue(u)}
-}
-function demoScan(){
-  const d=db(),dr=d.users.find(u=>u.role==="driver"&&u.school==="FUTA"&&u.status==="approved");
-  if(!dr)return toast("No approved FUTA driver is available.");
-  window.__selectedDriver=dr.id;
-  const el=document.getElementById("selectedDriver");
-  if(el)el.innerHTML=`<b>Driver identified: ${esc(dr.name)}</b><div class="small muted" style="margin-top:5px">${esc(dr.school)} · Approved driver</div><button class="btn green" style="margin-top:10px;width:100%" onclick="studentAction('change')">Continue to request change</button>`;
-  toast("Approved driver identified.");
-}
-async function startScanner(){
-  const readerEl=document.getElementById("reader");if(!readerEl)return;
-  if(!window.isSecureContext&&!["localhost","127.0.0.1"].includes(location.hostname)){
-    readerEl.innerHTML='<div class="small muted" style="padding:24px;text-align:center"><b>Camera needs HTTPS.</b><br><br>Deploy on Vercel/HTTPS for live scanning, or use Demo scan for the presentation.</div>';return toast("Camera scanning needs HTTPS.");
-  }
-  readerEl.innerHTML='<div class="small muted">Loading camera scanner…</div>';
-  try{
-    const Html5QrcodeClass=await ensureScannerLib();
-    stopScanner();readerEl.innerHTML="";
-    const reader=new Html5QrcodeClass("reader");window.__qrReader=reader;
-    const config={fps:10,qrbox:{width:230,height:230}};
-    const onScan=txt=>{
-      try{
-        const p=JSON.parse(txt),d=db(),dr=d.users.find(u=>u.id===p.driverId&&u.role==="driver"&&u.school===p.school&&u.status==="approved");
-        if(!dr)return toast("QR is not an approved SHUTLER driver.");
-        window.__selectedDriver=dr.id;reader.stop().then(()=>reader.clear()).catch(()=>{});window.__qrReader=null;
-        const el=document.getElementById("selectedDriver");
-        if(el)el.innerHTML=`<b>Driver identified: ${esc(dr.name)}</b><div class="small muted" style="margin-top:5px">${esc(dr.school)} · Approved driver</div><button class="btn green" style="margin-top:10px;width:100%" onclick="studentAction('change')">Continue to request change</button>`;
-        toast("Driver QR verified.");
-      }catch(e){toast("Invalid SHUTLER QR.");}
-    };
-    await reader.start({facingMode:{ideal:"environment"}},config,onScan,()=>{});
-  }catch(err){
-    window.__qrReader=null;
-    readerEl.innerHTML='<div class="small muted" style="padding:24px;text-align:center"><b>Camera could not be opened.</b><br><br>Check browser camera permission and HTTPS. The demo scan remains available.</div>';
-    toast("Camera access was unavailable.");
-  }
-}
-function submitClaim(e){
-  e.preventDefault();const u=session(),driver=document.getElementById("claimDriver").value,fare=Number(document.getElementById("fare").value),paid=Number(document.getElementById("paid").value),amount=paid-fare;
-  if(!driver)return toast("Select an approved driver.");if(!Number.isFinite(fare)||!Number.isFinite(paid)||amount<=0)return toast("Amount paid must be greater than the fare.");
-  const d=db(),dr=d.users.find(x=>x.id===driver&&x.role==="driver"&&x.school===u.school&&x.status==="approved");if(!dr)return toast("That driver is not approved.");
-  const id="c"+Date.now();d.claims.push({id,studentId:u.id,driverId:driver,amount,fare,paid,status:"pending",createdAt:new Date().toISOString()});
-  d.transactions.push({id:"t"+Date.now(),userId:u.id,type:"claim",amount,title:"Change claim",detail:`Awaiting ${dr.name}'s confirmation · ${timeNow()}`,status:"pending",claimId:id});
-  save(d);window.__selectedDriver=driver;toast(`${money(amount)} change claim sent to ${dr.name}.`);render();
-}
-function updatePreview(){
-  const fare=Number(document.getElementById("fare")?.value||0),paid=Number(document.getElementById("paid")?.value||0),p=document.getElementById("changePreview");
-  if(p)p.innerHTML=`Change owed: <b>${money(Math.max(0,paid-fare))}</b>`;
-}
-document.addEventListener("input",e=>{if(e.target.id==="fare"||e.target.id==="paid")updatePreview()});
-function fundDemoWallet(amount){
-  const u=session(),d=db(),live=d.users.find(x=>x.id===u.id);if(!live)return;
-  live.demoBalance=Number(live.demoBalance||0)+amount;d.transactions.push({id:"t"+Date.now(),userId:live.id,type:"funding",amount,title:"Wallet funding",detail:`Demo bank transfer · ${timeNow()}`,status:"confirmed"});
-  save(d);toast(`${money(amount)} added to your demo wallet.`);render();
-}
-function useCredit(e){
-  e.preventDefault();const u=session(),d=db(),live=d.users.find(x=>x.id===u.id),driver=document.getElementById("useDriver").value,amount=Number(document.getElementById("useAmount").value);
-  if(!driver)return toast("Select an approved driver.");if(!amount||amount<=0)return toast("Enter a valid ride amount.");if(amount>Number(live.credit||0))return toast("That ride costs more than your available credit.");
-  const dr=d.users.find(x=>x.id===driver&&x.role==="driver"&&x.status==="approved");if(!dr)return toast("Driver is not approved.");
-  live.credit-=amount;d.transactions.push({id:"t"+Date.now(),userId:live.id,type:"fare",amount:-amount,title:"Ride paid with change credit",detail:`${dr.name} · ${timeNow()}`,status:"confirmed"});
-  save(d);toast(`${money(amount)} of your change credit was applied.`);render();
-}
-function driver(user){
-  const d=db(),claims=d.claims.filter(c=>c.driverId===user.id).slice().reverse(),pending=claims.filter(c=>c.status==="pending").length;
-  return `${header(user)}<main class="shell">${appNav("driver")}
-    <div class="page-head"><div><div class="eyebrow">Driver dashboard</div><h2>Welcome, ${esc(user.name)}.</h2><p class="muted">Your QR identifies you to students. Confirm only claims that match the cash transaction.</p></div><button class="btn blue" onclick="openQR('${esc(user.id)}')">Show my QR →</button></div>
-    <div class="dashboard-grid"><div class="stat"><div class="label">Demo balance</div><div class="value">${money(user.demoBalance)}</div></div><div class="stat"><div class="label">School</div><div class="value" style="font-size:22px">${esc(user.school)}</div></div><div class="stat"><div class="label">Pending claims</div><div class="value">${pending}</div></div><div class="stat"><div class="label">Total claims</div><div class="value">${claims.length}</div></div></div>
-    <div class="card"><div class="eyebrow">Driver identity</div><h3>Your SHUTLER QR</h3><p class="muted">Students scan this code to identify you before creating a change claim.</p><button class="btn soft" onclick="openQR('${esc(user.id)}')">Open QR code</button></div>
-    <div class="card"><div class="eyebrow">Verification queue</div><h3>Change claims</h3><div class="list">${claims.length?claims.map(c=>{const st=d.users.find(x=>x.id===c.studentId);return `<div class="row"><div class="row-main"><div class="row-title">${money(c.amount)} change · ${esc(st?.name||"Student")}</div><div class="row-sub">Fare ${money(c.fare)} · Paid ${money(c.paid)}</div></div><div class="actions"><span class="badge ${c.status}">${esc(c.status)}</span>${c.status==="pending"?`<button class="btn green" onclick="driverDecision('${esc(c.id)}','confirmed')">Confirm</button><button class="btn red" onclick="driverDecision('${esc(c.id)}','rejected')">Reject</button>`:""}</div></div>`}).join(""):'<div class="empty">No change claims yet.</div>'}</div></div>
-    <div class="footer"><strong>SHUTLER</strong> · Driver verification keeps the credit accountable.</div>
-  </main>`;
-}
-function driverDecision(id,status){
-  const d=db(),u=session(),c=d.claims.find(x=>x.id===id);
-  if(!c||c.driverId!==u.id||c.status!=="pending")return toast("This claim has already been processed.");
-  c.status=status;const st=d.users.find(x=>x.id===c.studentId);
-  const tx=d.transactions.find(t=>t.claimId===c.id);
-  if(status==="confirmed"&&st){
-    st.credit=Number(st.credit||0)+Number(c.amount);
-    if(tx){tx.status="confirmed";tx.title="Change credit received";tx.detail=`Driver confirmed · ${timeNow()}`}
-    else d.transactions.push({id:"t"+Date.now(),userId:st.id,type:"credit",amount:c.amount,title:"Change credit received",detail:`Driver confirmed · ${timeNow()}`,status:"confirmed",claimId:c.id});
-  }else if(tx){tx.status="rejected";tx.title="Change claim rejected";tx.detail=`Driver rejected · ${timeNow()}`}
-  save(d);toast(status==="confirmed"?"Claim confirmed — student credit updated.":"Claim rejected.");render();
-}
-function pendingDriver(u){
-  return `${header(u)}<main class="shell"><div class="card centered" style="max-width:680px;margin:70px auto;padding:40px">
-    <span class="badge pending">Waiting for approval</span><h2 style="margin-top:14px">Driver account submitted</h2>
-    <p class="muted">Your ${esc(u.school)} driver account is waiting for approval by the transport admin.</p>
-    <div class="notice">Once approved, you can display your SHUTLER QR and respond to student change claims.</div>
-    <button class="btn outline" style="margin-top:12px" onclick="logout()">Back to sign in</button>
-  </div></main>`;
-}
-function admin(user){
-  const d=db(),drivers=d.users.filter(u=>u.role==="driver"&&u.school===user.school),issues=d.issues.filter(i=>d.users.find(x=>x.id===i.studentId)?.school===user.school).slice().reverse();
-  return `${header(user)}<main class="shell">${appNav("admin")}
-    <div class="page-head"><div><div class="eyebrow">Transport office · ${esc(user.school)}</div><h2>Admin control centre</h2><p class="muted">Approve registered drivers and resolve student-reported transaction issues.</p></div><button class="btn outline" onclick="resetDemo()">Reset demo</button></div>
-    <div class="dashboard-grid"><div class="stat"><div class="label">Registered drivers</div><div class="value">${drivers.length}</div></div><div class="stat"><div class="label">Pending approvals</div><div class="value">${drivers.filter(x=>x.status==="pending").length}</div></div><div class="stat"><div class="label">Open issues</div><div class="value">${issues.filter(x=>x.status==="open").length}</div></div><div class="stat"><div class="label">System status</div><div class="value" style="font-size:21px;color:var(--green)">Demo live</div></div></div>
-    <div class="grid two">
-      <div class="card"><div class="eyebrow">Driver management</div><h3>Approval queue</h3><div class="list">${drivers.length?drivers.map(x=>`<div class="row"><div class="row-main"><div class="row-title">${esc(x.name)}</div><div class="row-sub">${esc(x.email)} · ${esc(x.school)}</div></div><div class="actions"><span class="badge ${x.status}">${esc(x.status)}</span>${x.status==="pending"?`<button class="btn green" onclick="adminDecision('${esc(x.id)}','approved')">Approve</button><button class="btn red" onclick="adminDecision('${esc(x.id)}','rejected')">Reject</button>`:""}</div></div>`).join(""):'<div class="empty">No drivers found.</div>'}</div></div>
-      <div class="card"><div class="eyebrow">Student support</div><h3>Transaction issues</h3><div class="list">${issues.length?issues.map(i=>{const st=d.users.find(x=>x.id===i.studentId);return `<div class="row"><div class="row-main"><div class="row-title">${esc(i.title)}</div><div class="row-sub">${esc(st?.name||"Student")} · ${esc(i.text)}</div></div><div class="actions"><span class="badge ${i.status}">${esc(i.status)}</span>${i.status==="open"?`<button class="btn green" onclick="resolveIssue('${esc(i.id)}')">Resolve</button>`:""}</div></div>`}).join(""):'<div class="empty">No issues reported.</div>'}</div></div>
+
+  const positive=
+    Number(t.amount)>=0;
+
+
+  return `
+
+    <div class="row">
+
+      <div class="row-main">
+
+        <div class="row-title">
+          ${esc(t.title)}
+        </div>
+
+        <div class="row-sub">
+          ${esc(
+            t.detail||
+            "SHUTLER transaction"
+          )}
+        </div>
+
+      </div>
+
+
+      <strong
+        class="${
+          positive
+          ?
+          "money-green"
+          :
+          "money-red"
+        }"
+      >
+
+        ${
+          positive
+          ?
+          "+"
+          :
+          ""
+        }
+
+        ${money(t.amount)}
+
+      </strong>
+
     </div>
-    <div class="footer"><strong>SHUTLER</strong> · Transport operations demo.</div>
-  </main>`;
+
+  `;
+
 }
-function adminDecision(id,status){
-  const d=db(),u=session(),x=d.users.find(x=>x.id===id&&x.school===u.school&&x.role==="driver");if(!x)return;
-  x.status=status;save(d);toast(`Driver ${status}.`);render();
+
+
+function claimRow(c,d){
+
+  const dr=
+    d.users.find(
+      u=>u.id===c.driverId
+    );
+
+
+  return `
+
+    <div class="row">
+
+      <div class="row-main">
+
+        <div class="row-title">
+
+          ${money(c.amount)}
+          change ·
+          ${esc(
+            dr?.name||
+            "Driver"
+          )}
+
+        </div>
+
+        <div class="row-sub">
+
+          Fare ${money(c.fare)}
+          ·
+          Paid ${money(c.paid)}
+
+        </div>
+
+      </div>
+
+
+      <span
+        class="badge ${c.status}"
+      >
+        ${esc(c.status)}
+      </span>
+
+    </div>
+
+  `;
+
 }
-function submitIssue(e){
-  e.preventDefault();const u=session(),d=db(),textValue=document.getElementById("issueText").value.trim();if(!textValue)return;
-  d.issues.push({id:"i"+Date.now(),studentId:u.id,title:"Student transaction issue",text:textValue,status:"open",createdAt:new Date().toISOString()});
-  save(d);toast("Issue sent to the transport admin.");render();
+
+
+/* =========================================================
+   STUDENT SCANNER UI
+   ========================================================= */
+
+function studentScan(user){
+
+  return `
+
+    <div class="card">
+
+      <div class="eyebrow">
+        Identify your shuttle
+      </div>
+
+      <h3>
+        Scan driver's SHUTLER QR
+      </h3>
+
+      <p class="muted">
+
+        Point your computer camera at the
+        driver's SHUTLER QR code.
+
+        The camera will start automatically
+        when you choose Scan QR.
+
+      </p>
+
+
+      <div class="scanner">
+
+
+        <div
+          class="scanner-box"
+          id="reader"
+        >
+
+          <div class="camera-status">
+
+            <strong>
+              Camera scanner ready
+            </strong>
+
+            Click
+            <b>Scan QR</b>
+            above to start your camera.
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div
+            id="selectedDriver"
+            class="driver-card"
+          >
+
+            <b>
+              No driver selected
+            </b>
+
+            <div
+              class="small muted"
+              style="margin-top:5px"
+            >
+              Scan an approved driver's QR code.
+            </div>
+
+          </div>
+
+
+          <button
+            class="btn outline"
+            style="margin-top:12px;width:100%"
+            onclick="startScanner()"
+          >
+            Start camera manually
+          </button>
+
+
+          <button
+            class="btn soft"
+            style="margin-top:8px;width:100%"
+            onclick="demoScan()"
+          >
+            Demo scan approved driver
+          </button>
+
+
+          <div
+            class="helper"
+            style="margin-top:10px"
+          >
+
+            <b>
+              Presentation setup
+            </b>
+
+            <br>
+
+            Display the driver's QR on your phone,
+            then point this computer's webcam at it.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
 }
-function resolveIssue(id){
-  const d=db(),u=session(),i=d.issues.find(x=>x.id===id);if(!i)return;
-  const st=d.users.find(x=>x.id===i.studentId);if(!st||st.school!==u.school)return;
-  i.status="resolved";save(d);toast("Issue resolved.");render();
-}
-async function openQR(id){
-  const d=db(),u=d.users.find(x=>x.id===id&&x.role==="driver"&&x.status==="approved");if(!u)return toast("Approved driver not found.");
-  const modal=document.getElementById("modal");
-  modal.innerHTML=`<div class="modal-box"><button class="close" onclick="closeModal()">×</button><div class="eyebrow">DRIVER QR</div><h2>${esc(u.name)}</h2><p class="muted">${esc(u.school)} · Approved SHUTLER driver</p><div id="qr" class="qr-holder"><div class="muted small">Generating secure demo QR…</div></div><p class="small muted centered">Students scan this code to identify this driver. The QR contains only the demo driver identifier and school.</p></div>`;
-  modal.classList.remove("hidden");
-  try{
-    const QRCodeClass=await ensureQRLib();
-    const qr=document.getElementById("qr");if(!qr)return;
-    qr.innerHTML="";
-    new QRCodeClass(qr,{text:JSON.stringify({app:APP_NAME,version:1,driverId:u.id,school:u.school}),width:230,height:230,colorDark:"#08264d",colorLight:"#ffffff",correctLevel:QRCodeClass.CorrectLevel.M});
-  }catch(e){
-    const qr=document.getElementById("qr");if(qr)qr.innerHTML='<div class="danger-note">QR generator could not load. Check internet connection and reopen the QR.</div>';
-    toast("QR generator could not load.");
+
+
+/* =========================================================
+   IMPORTANT:
+   STUDENT "SCAN QR" ACTION
+   NOW AUTOMATICALLY STARTS CAMERA
+   ========================================================= */
+
+function studentAction(type){
+
+  /*
+    Request the old scanner to stop.
+  */
+
+  const stopPromise=
+    stopScanner();
+
+
+  const u=session();
+
+  if(!u){
+    return;
   }
+
+
+  const host=
+    document.getElementById(
+      "studentAction"
+    );
+
+  if(!host){
+    return;
+  }
+
+
+  /* -----------------------------------------
+     SCAN QR
+     ----------------------------------------- */
+
+  if(type==="scan"){
+
+    window.__selectedDriver="";
+
+    /*
+      Render scanner.
+    */
+
+    host.innerHTML=
+      studentScan(u);
+
+
+    /*
+      Automatically start the camera
+      after the scanner DOM exists.
+    */
+
+    setTimeout(
+      ()=>{
+        stopPromise
+          .then(
+            ()=>startScanner()
+          )
+          .catch(
+            ()=>startScanner()
+          );
+      },
+      100
+    );
+
+
+    /*
+      Scroll scanner into view.
+    */
+
+    setTimeout(
+      ()=>{
+        host.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+      },
+      120
+    );
+
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     REQUEST CHANGE
+     ----------------------------------------- */
+
+  if(type==="change"){
+
+    host.innerHTML=
+      studentChange(
+        u,
+        window.__selectedDriver||""
+      );
+
+    setTimeout(
+      updatePreview,
+      20
+    );
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     USE CREDIT
+     ----------------------------------------- */
+
+  if(type==="useCredit"){
+
+    host.innerHTML=
+      studentUseCredit(u);
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     WALLET
+     ----------------------------------------- */
+
+  if(type==="wallet"){
+
+    host.innerHTML=
+      studentWallet(u);
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     ISSUE
+     ----------------------------------------- */
+
+  if(type==="issue"){
+
+    host.innerHTML=
+      studentIssue(u);
+
+  }
+
 }
-function closeModal(){stopScanner();document.getElementById("modal").classList.add("hidden");document.getElementById("modal").innerHTML=""}
+
+
+/* =========================================================
+   DEMO SCAN FALLBACK
+   ========================================================= */
+
+function demoScan(){
+
+  const d=db();
+
+  const dr=
+    d.users.find(
+      u=>
+        u.role==="driver" &&
+        u.school==="FUTA" &&
+        u.status==="approved"
+    );
+
+
+  if(!dr){
+
+    return toast(
+      "No approved FUTA driver is available."
+    );
+
+  }
+
+
+  window.__selectedDriver=
+    dr.id;
+
+
+  const el=
+    document.getElementById(
+      "selectedDriver"
+    );
+
+
+  if(el){
+
+    el.innerHTML=`
+
+      <b>
+        ✓ Driver identified
+      </b>
+
+      <div
+        style="
+          margin-top:8px;
+          font-size:15px;
+          font-weight:900;
+        "
+      >
+        ${esc(dr.name)}
+      </div>
+
+      <div
+        class="small muted"
+        style="margin-top:5px"
+      >
+        ${esc(dr.school)}
+        · Approved SHUTLER driver
+      </div>
+
+      <button
+        class="btn green"
+        style="margin-top:10px;width:100%"
+        onclick="studentAction('change')"
+      >
+        Continue to request change →
+      </button>
+
+    `;
+
+  }
+
+
+  toast(
+    "Approved driver identified."
+  );
+
+}
+
+
+/* =========================================================
+   REAL CAMERA SCANNER
+   ========================================================= */
+
+async function startScanner(){
+
+  const readerEl=
+    document.getElementById(
+      "reader"
+    );
+
+
+  if(!readerEl){
+
+    toast(
+      "Scanner area not found."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Don't start two scanners at the same time.
+  */
+
+  if(window.__startingScanner){
+
+    return;
+
+  }
+
+
+  if(window.__qrReader){
+
+    toast(
+      "Camera scanner is already running."
+    );
+
+    return;
+
+  }
+
+
+  window.__startingScanner=true;
+
+
+  /* =======================================================
+     CHECK HTTPS / SECURE CONTEXT
+     ======================================================= */
+
+  if(
+    !window.isSecureContext &&
+    ![
+      "localhost",
+      "127.0.0.1"
+    ].includes(location.hostname)
+  ){
+
+    window.__startingScanner=false;
+
+
+    readerEl.innerHTML=`
+
+      <div
+        class="camera-status"
+        style="padding:30px"
+      >
+
+        <strong>
+          Camera requires HTTPS
+        </strong>
+
+        Open the SHUTLER app through
+        your Vercel HTTPS link.
+
+        <br><br>
+
+        Camera scanning will work on
+        the deployed Vercel version.
+
+        <br><br>
+
+        <button
+          class="btn blue"
+          onclick="startScanner()"
+        >
+          Try camera again
+        </button>
+
+      </div>
+
+    `;
+
+
+    toast(
+      "Camera scanning requires HTTPS."
+    );
+
+    return;
+
+  }
+
+
+  /* =======================================================
+     CHECK CAMERA API
+     ======================================================= */
+
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ){
+
+    window.__startingScanner=false;
+
+
+    readerEl.innerHTML=`
+
+      <div
+        class="camera-status"
+        style="padding:30px"
+      >
+
+        <strong>
+          Camera API unavailable
+        </strong>
+
+        This browser does not provide
+        the camera access required by SHUTLER.
+
+        <br><br>
+
+        Please use Chrome or Edge
+        on the deployed HTTPS site.
+
+      </div>
+
+    `;
+
+
+    toast(
+      "Camera API is unavailable."
+    );
+
+    return;
+
+  }
+
+
+  /* =======================================================
+     LOAD QR SCANNER LIBRARY
+     ======================================================= */
+
+  readerEl.innerHTML=`
+
+    <div
+      class="camera-status"
+      style="padding:30px"
+    >
+
+      <strong>
+        Starting camera…
+      </strong>
+
+      Your browser may ask for
+      camera permission.
+
+    </div>
+
+  `;
+
+
+  try{
+
+    const Html5QrcodeClass=
+      await ensureScannerLib();
+
+
+    /*
+      The scanner element may have been changed
+      while the library was loading.
+    */
+
+    const currentReader=
+      document.getElementById(
+        "reader"
+      );
+
+    if(!currentReader){
+
+      window.__startingScanner=false;
+
+      return;
+
+    }
+
+
+    /*
+      Make sure we are starting fresh.
+    */
+
+    await stopScanner();
+
+
+    currentReader.innerHTML="";
+
+
+    /*
+      Create scanner instance.
+    */
+
+    const reader=
+      new Html5QrcodeClass(
+        "reader"
+      );
+
+
+    window.__qrReader=
+      reader;
+
+
+    /*
+      Scanner configuration.
+    */
+
+    const config={
+
+      fps:10,
+
+      qrbox:{
+        width:250,
+        height:250
+      }
+
+    };
+
+
+    let scanLocked=false;
+
+
+    /* =====================================================
+       HANDLE SUCCESSFUL QR SCAN
+       ===================================================== */
+
+    const handleScan=
+      async(decodedText)=>{
+
+        if(scanLocked){
+
+          return;
+
+        }
+
+        scanLocked=true;
+
+
+        try{
+
+          /*
+            Decode the QR payload.
+          */
+
+          const payload=
+            JSON.parse(
+              decodedText
+            );
+
+
+          /*
+            Read current database.
+          */
+
+          const d=db();
+
+
+          /*
+            Verify that this QR actually belongs
+            to an approved SHUTLER driver.
+          */
+
+          const dr=
+            d.users.find(
+              u=>
+                u.id===payload.driverId &&
+                u.role==="driver" &&
+                u.school===payload.school &&
+                u.status==="approved"
+            );
+
+
+          if(!dr){
+
+            scanLocked=false;
+
+            toast(
+              "QR is not an approved SHUTLER driver."
+            );
+
+            return;
+
+          }
+
+
+          /*
+            Driver successfully identified.
+          */
+
+          window.__selectedDriver=
+            dr.id;
+
+
+          /*
+            Stop camera after successful scan.
+          */
+
+          try{
+
+            await reader.stop();
+
+          }catch(e){}
+
+
+          try{
+
+            await reader.clear();
+
+          }catch(e){}
+
+
+          window.__qrReader=
+            null;
+
+
+          /*
+            Update UI.
+          */
+
+          const el=
+            document.getElementById(
+              "selectedDriver"
+            );
+
+
+          if(el){
+
+            el.innerHTML=`
+
+              <b>
+                ✓ Driver identified
+              </b>
+
+              <div
+                style="
+                  margin-top:8px;
+                  font-size:15px;
+                  font-weight:900;
+                "
+              >
+                ${esc(dr.name)}
+              </div>
+
+              <div
+                class="small muted"
+                style="margin-top:5px"
+              >
+                ${esc(dr.school)}
+                · Approved SHUTLER driver
+              </div>
+
+
+              <button
+                class="btn green"
+                style="
+                  margin-top:12px;
+                  width:100%;
+                "
+                onclick="
+                  studentAction('change')
+                "
+              >
+                Continue to request change →
+              </button>
+
+            `;
+
+          }
+
+
+          toast(
+            "Driver QR verified successfully."
+          );
+
+
+        }catch(error){
+
+          /*
+            QR may belong to another format.
+            Keep scanner running.
+          */
+
+          scanLocked=false;
+
+          toast(
+            "That QR is not a valid SHUTLER driver QR."
+          );
+
+        }
+
+      };
+
+
+    /* =====================================================
+       FIND AVAILABLE CAMERAS
+       ===================================================== */
+
+    let cameras=[];
+
+
+    try{
+
+      cameras=
+        await Html5QrcodeClass.getCameras();
+
+    }catch(cameraError){
+
+      cameras=[];
+
+    }
+
+
+    /* =====================================================
+       CAMERA FOUND
+       ===================================================== */
+
+    if(
+      cameras &&
+      cameras.length>0
+    ){
+
+      /*
+        Prefer a rear/environment camera
+        when a device exposes one.
+
+        On a laptop, there is normally
+        only one webcam, so cameras[0]
+        will be selected.
+      */
+
+      let selectedCamera=
+        cameras.find(
+          camera=>
+            /back|rear|environment/i.test(
+              camera.label||""
+            )
+        );
+
+
+      if(!selectedCamera){
+
+        selectedCamera=
+          cameras[0];
+
+      }
+
+
+      await reader.start(
+
+        selectedCamera.id,
+
+        config,
+
+        handleScan,
+
+        ()=>{}
+
+      );
+
+
+      window.__startingScanner=
+        false;
+
+
+      toast(
+        "Camera is live. Point it at the driver's QR."
+      );
+
+
+      return;
+
+    }
+
+
+    /* =====================================================
+       FALLBACK CAMERA CONSTRAINT
+       ===================================================== */
+
+    await reader.start(
+
+      {
+        facingMode:"environment"
+      },
+
+      config,
+
+      handleScan,
+
+      ()=>{}
+
+    );
+
+
+    window.__startingScanner=
+      false;
+
+
+    toast(
+      "Camera is live. Point it at the driver's QR."
+    );
+
+
+  }catch(err){
+
+    console.error(
+      "SHUTLER camera error:",
+      err
+    );
+
+
+    window.__qrReader=
+      null;
+
+    window.__startingScanner=
+      false;
+
+
+    readerEl.innerHTML=`
+
+      <div
+        class="camera-status"
+        style="padding:30px"
+      >
+
+        <strong>
+          Camera could not be opened
+        </strong>
+
+        Make sure you:
+
+        <br><br>
+
+        • Open SHUTLER using your Vercel
+        HTTPS link.
+
+        <br>
+
+        • Allow camera permission when
+        Chrome or Edge asks.
+
+        <br>
+
+        • Make sure another application
+        is not currently using the webcam.
+
+        <br><br>
+
+        <button
+          class="btn blue"
+          onclick="startScanner()"
+        >
+          Try camera again
+        </button>
+
+
+        <button
+          class="btn outline"
+          style="margin-top:8px"
+          onclick="demoScan()"
+        >
+          Use demo scan
+        </button>
+
+      </div>
+
+    `;
+
+
+    toast(
+      "Camera access was unavailable."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CHANGE CLAIM
+   ========================================================= */
+
+function studentChange(
+  user,
+  driverId
+){
+
+  const d=db();
+
+  const drivers=
+    d.users.filter(
+      u=>
+        u.role==="driver" &&
+        u.school===user.school &&
+        u.status==="approved"
+    );
+
+
+  return `
+
+    <div class="card">
+
+      <div class="eyebrow">
+        Change claim
+      </div>
+
+      <h3>
+        Record the cash transaction
+      </h3>
+
+      <p class="muted">
+        SHUTLER calculates the exact change owed
+        from the fare and amount paid.
+      </p>
+
+
+      <form
+        onsubmit="submitClaim(event)"
+      >
+
+        <input
+          type="hidden"
+          id="claimDriver"
+          value="${esc(driverId||"")}"
+        >
+
+
+        <label>
+
+          Approved driver
+
+          <select
+            id="driverSelect"
+            onchange="
+              document.getElementById(
+                'claimDriver'
+              ).value=this.value
+            "
+          >
+
+            <option value="">
+              Select driver
+            </option>
+
+
+            ${
+              drivers
+                .map(
+                  x=>`
+
+                    <option
+                      value="${esc(x.id)}"
+                      ${
+                        x.id===driverId
+                        ?
+                        "selected"
+                        :
+                        ""
+                      }
+                    >
+
+                      ${esc(x.name)}
+                      ·
+                      ${esc(x.school)}
+
+                    </option>
+
+                  `
+                )
+                .join("")
+            }
+
+          </select>
+
+        </label>
+
+
+        <div class="form-grid">
+
+          <label>
+
+            Fare
+
+            <input
+              id="fare"
+              type="number"
+              min="1"
+              required
+              placeholder="200"
+            >
+
+          </label>
+
+
+          <label>
+
+            Amount paid
+
+            <input
+              id="paid"
+              type="number"
+              min="1"
+              required
+              placeholder="500"
+            >
+
+          </label>
+
+        </div>
+
+
+        <div
+          id="changePreview"
+          class="notice"
+        >
+          Change owed: ₦0
+        </div>
+
+
+        <button
+          class="btn primary"
+          type="submit"
+        >
+          Send claim to driver →
+        </button>
+
+      </form>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   USE CREDIT
+   ========================================================= */
+
+function studentUseCredit(user){
+
+  const d=db();
+
+  const drivers=
+    d.users.filter(
+      u=>
+        u.role==="driver" &&
+        u.school===user.school &&
+        u.status==="approved"
+    );
+
+
+  return `
+
+    <div class="card">
+
+      <div class="eyebrow">
+        Use confirmed credit
+      </div>
+
+      <h3>
+        Apply credit to a future ride
+      </h3>
+
+      <p class="muted">
+        This demo lets you simulate using
+        confirmed SHUTLER credit toward
+        an approved ride.
+      </p>
+
+
+      <div
+        class="wallet-balance"
+        style="margin:12px 0"
+      >
+
+        <span>
+          Available change credit
+        </span>
+
+        <strong>
+          ${money(user.credit)}
+        </strong>
+
+      </div>
+
+
+      <form
+        onsubmit="useCredit(event)"
+      >
+
+        <label>
+
+          Approved driver
+
+          <select id="useDriver">
+
+            <option value="">
+              Select driver
+            </option>
+
+            ${
+              drivers
+                .map(
+                  x=>`
+
+                    <option
+                      value="${esc(x.id)}"
+                    >
+
+                      ${esc(x.name)}
+                      ·
+                      ${esc(x.school)}
+
+                    </option>
+
+                  `
+                )
+                .join("")
+            }
+
+          </select>
+
+        </label>
+
+
+        <label>
+
+          Ride fare
+
+          <input
+            id="useAmount"
+            type="number"
+            min="1"
+            required
+            placeholder="200"
+          >
+
+        </label>
+
+
+        <div class="notice">
+
+          Credit available:
+          <b>
+            ${money(user.credit)}
+          </b>.
+
+          The demo will deduct only
+          the amount of credit used.
+
+        </div>
+
+
+        <button
+          class="btn green"
+          type="submit"
+          ${
+            user.credit<=0
+            ?
+            "disabled"
+            :
+            ""
+          }
+        >
+          Apply credit to ride →
+        </button>
+
+      </form>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   DEMO WALLET
+   ========================================================= */
+
+function studentWallet(user){
+
+  return `
+
+    <div class="card wallet-card">
+
+      <div class="eyebrow">
+        Demo wallet
+      </div>
+
+
+      <div class="wallet-head">
+
+        <div>
+
+          <h3>
+            Fund your SHUTLER wallet
+          </h3>
+
+          <p class="muted">
+            This is a presentation-only simulation
+            of wallet funding. No real money moves.
+          </p>
+
+        </div>
+
+
+        <div class="wallet-balance">
+
+          <span>
+            Current balance
+          </span>
+
+          <strong>
+            ${money(user.demoBalance)}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="bank-transfer">
+
+        <strong>
+          Bank transfer simulation
+        </strong>
+
+        <p class="small muted">
+          In a production version, this step would
+          connect to a payment provider.
+        </p>
+
+
+        <div class="bank-grid">
+
+          <div>
+
+            <span>
+              Bank
+            </span>
+
+            <strong>
+              SHUTLER Demo Bank
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Account name
+            </span>
+
+            <strong>
+              ${esc(user.name)}
+              · SHUTLER Wallet
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Account number
+            </span>
+
+            <strong>
+              0123456789
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="notice">
+          Demo only — no real money is transferred.
+        </div>
+
+
+        <button
+          class="btn green"
+          onclick="fundDemoWallet(1000)"
+        >
+          Add ₦1,000 demo funds
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   STUDENT ISSUES
+   ========================================================= */
+
+function studentIssue(user){
+
+  const d=db();
+
+  const tx=
+    d.transactions.filter(
+      t=>t.userId===user.id
+    );
+
+
+  return `
+
+    <div class="card">
+
+      <div class="eyebrow">
+        Support
+      </div>
+
+      <h3>
+        Report a transaction issue
+      </h3>
+
+      <p class="muted">
+        Report a disputed fare, wrong credit,
+        or driver confirmation issue.
+      </p>
+
+
+      <form
+        onsubmit="submitIssue(event)"
+      >
+
+        <label>
+
+          Transaction
+
+          <select id="issueTx">
+
+            ${
+              tx.length
+              ?
+              tx.map(
+                t=>`
+
+                  <option
+                    value="${esc(t.id)}"
+                  >
+
+                    ${esc(t.title)}
+                    ·
+                    ${money(t.amount)}
+
+                  </option>
+
+                `
+              ).join("")
+              :
+              `
+                <option>
+                  No transactions available
+                </option>
+              `
+            }
+
+          </select>
+
+        </label>
+
+
+        <label>
+
+          What happened?
+
+          <textarea
+            id="issueText"
+            rows="4"
+            required
+            placeholder="Explain the issue briefly..."
+          ></textarea>
+
+        </label>
+
+
+        <button
+          class="btn primary"
+          type="submit"
+        >
+          Send to transport admin →
+        </button>
+
+      </form>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   CHANGE PREVIEW
+   ========================================================= */
+
+function updatePreview(){
+
+  const fare=
+    Number(
+      document.getElementById(
+        "fare"
+      )?.value||0
+    );
+
+  const paid=
+    Number(
+      document.getElementById(
+        "paid"
+      )?.value||0
+    );
+
+  const p=
+    document.getElementById(
+      "changePreview"
+    );
+
+
+  if(p){
+
+    p.innerHTML=
+      `
+        Change owed:
+        <b>
+          ${money(
+            Math.max(
+              0,
+              paid-fare
+            )
+          )}
+        </b>
+      `;
+
+  }
+
+}
+
+
+document.addEventListener(
+  "input",
+  e=>{
+
+    if(
+      e.target.id==="fare" ||
+      e.target.id==="paid"
+    ){
+
+      updatePreview();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   CLAIM SUBMISSION
+   ========================================================= */
+
+function submitClaim(e){
+
+  e.preventDefault();
+
+  const u=session();
+
+  const driver=
+    document.getElementById(
+      "claimDriver"
+    ).value;
+
+  const fare=
+    Number(
+      document.getElementById(
+        "fare"
+      ).value
+    );
+
+  const paid=
+    Number(
+      document.getElementById(
+        "paid"
+      ).value
+    );
+
+  const amount=
+    paid-fare;
+
+
+  if(!driver){
+
+    return toast(
+      "Select an approved driver."
+    );
+
+  }
+
+
+  if(
+    !Number.isFinite(fare) ||
+    !Number.isFinite(paid) ||
+    amount<=0
+  ){
+
+    return toast(
+      "Amount paid must be greater than the fare."
+    );
+
+  }
+
+
+  const d=db();
+
+
+  const dr=
+    d.users.find(
+      x=>
+        x.id===driver &&
+        x.role==="driver" &&
+        x.school===u.school &&
+        x.status==="approved"
+    );
+
+
+  if(!dr){
+
+    return toast(
+      "That driver is not approved."
+    );
+
+  }
+
+
+  const id=
+    "c"+Date.now();
+
+
+  d.claims.push({
+
+    id,
+
+    studentId:u.id,
+
+    driverId:driver,
+
+    amount,
+
+    fare,
+
+    paid,
+
+    status:"pending",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+
+  d.transactions.push({
+
+    id:
+      "t"+Date.now(),
+
+    userId:u.id,
+
+    type:"claim",
+
+    amount,
+
+    title:"Change claim",
+
+    detail:
+      `Awaiting ${dr.name}'s confirmation · ${timeNow()}`,
+
+    status:"pending",
+
+    claimId:id
+
+  });
+
+
+  save(d);
+
+  window.__selectedDriver=
+    driver;
+
+  toast(
+    `${money(amount)} change claim sent to ${dr.name}.`
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   FUND DEMO WALLET
+   ========================================================= */
+
+function fundDemoWallet(amount){
+
+  const u=session();
+
+  const d=db();
+
+  const live=
+    d.users.find(
+      x=>x.id===u.id
+    );
+
+
+  if(!live){
+
+    return;
+
+  }
+
+
+  live.demoBalance=
+    Number(
+      live.demoBalance||0
+    )+
+    amount;
+
+
+  d.transactions.push({
+
+    id:
+      "t"+Date.now(),
+
+    userId:live.id,
+
+    type:"funding",
+
+    amount,
+
+    title:"Wallet funding",
+
+    detail:
+      `Demo bank transfer · ${timeNow()}`,
+
+    status:"confirmed"
+
+  });
+
+
+  save(d);
+
+  toast(
+    `${money(amount)} added to your demo wallet.`
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   USE CREDIT
+   ========================================================= */
+
+function useCredit(e){
+
+  e.preventDefault();
+
+  const u=session();
+
+  const d=db();
+
+  const live=
+    d.users.find(
+      x=>x.id===u.id
+    );
+
+  const driver=
+    document.getElementById(
+      "useDriver"
+    ).value;
+
+  const amount=
+    Number(
+      document.getElementById(
+        "useAmount"
+      ).value
+    );
+
+
+  if(!driver){
+
+    return toast(
+      "Select an approved driver."
+    );
+
+  }
+
+
+  if(
+    !amount ||
+    amount<=0
+  ){
+
+    return toast(
+      "Enter a valid ride amount."
+    );
+
+  }
+
+
+  if(
+    amount>
+    Number(live.credit||0)
+  ){
+
+    return toast(
+      "That ride costs more than your available credit."
+    );
+
+  }
+
+
+  const dr=
+    d.users.find(
+      x=>
+        x.id===driver &&
+        x.role==="driver" &&
+        x.status==="approved"
+    );
+
+
+  if(!dr){
+
+    return toast(
+      "Driver is not approved."
+    );
+
+  }
+
+
+  live.credit-=
+    amount;
+
+
+  d.transactions.push({
+
+    id:
+      "t"+Date.now(),
+
+    userId:live.id,
+
+    type:"fare",
+
+    amount:-amount,
+
+    title:"Ride paid with change credit",
+
+    detail:
+      `${dr.name} · ${timeNow()}`,
+
+    status:"confirmed"
+
+  });
+
+
+  save(d);
+
+  toast(
+    `${money(amount)} of your change credit was applied.`
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   DRIVER DASHBOARD
+   ========================================================= */
+
+function driver(user){
+
+  const d=db();
+
+  const claims=
+    d.claims
+    .filter(
+      c=>c.driverId===user.id
+    )
+    .slice()
+    .reverse();
+
+  const pending=
+    claims.filter(
+      c=>c.status==="pending"
+    ).length;
+
+
+  return `
+
+    ${header(user)}
+
+    <main class="shell">
+
+      ${appNav("driver")}
+
+
+      <div class="page-head">
+
+        <div>
+
+          <div class="eyebrow">
+            Driver dashboard
+          </div>
+
+          <h2>
+            Welcome,
+            ${esc(user.name)}.
+          </h2>
+
+          <p class="muted">
+            Your QR identifies you to students.
+            Confirm only claims that match
+            the cash transaction.
+          </p>
+
+        </div>
+
+
+        <button
+          class="btn blue"
+          onclick="openQR('${esc(user.id)}')"
+        >
+          Show my QR →
+        </button>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+        <div class="stat">
+
+          <div class="label">
+            Demo balance
+          </div>
+
+          <div class="value">
+            ${money(user.demoBalance)}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            School
+          </div>
+
+          <div
+            class="value"
+            style="font-size:22px"
+          >
+            ${esc(user.school)}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Pending claims
+          </div>
+
+          <div class="value">
+            ${pending}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Total claims
+          </div>
+
+          <div class="value">
+            ${claims.length}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="eyebrow">
+          Driver identity
+        </div>
+
+        <h3>
+          Your SHUTLER QR
+        </h3>
+
+        <p class="muted">
+          Students scan this code to identify
+          you before creating a change claim.
+        </p>
+
+
+        <button
+          class="btn soft"
+          onclick="openQR('${esc(user.id)}')"
+        >
+          Open QR code
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="eyebrow">
+          Verification queue
+        </div>
+
+        <h3>
+          Change claims
+        </h3>
+
+
+        <div class="list">
+
+          ${
+            claims.length
+            ?
+            claims.map(
+              c=>{
+
+                const st=
+                  d.users.find(
+                    x=>x.id===c.studentId
+                  );
+
+
+                return `
+
+                  <div class="row">
+
+                    <div class="row-main">
+
+                      <div class="row-title">
+
+                        ${money(c.amount)}
+                        change ·
+                        ${esc(
+                          st?.name||
+                          "Student"
+                        )}
+
+                      </div>
+
+                      <div class="row-sub">
+
+                        Fare
+                        ${money(c.fare)}
+
+                        ·
+
+                        Paid
+                        ${money(c.paid)}
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="actions">
+
+                      <span
+                        class="badge ${c.status}"
+                      >
+                        ${esc(c.status)}
+                      </span>
+
+
+                      ${
+                        c.status==="pending"
+                        ?
+                        `
+                          <button
+                            class="btn green"
+                            onclick="
+                              driverDecision(
+                                '${esc(c.id)}',
+                                'confirmed'
+                              )
+                            "
+                          >
+                            Confirm
+                          </button>
+
+
+                          <button
+                            class="btn red"
+                            onclick="
+                              driverDecision(
+                                '${esc(c.id)}',
+                                'rejected'
+                              )
+                            "
+                          >
+                            Reject
+                          </button>
+                        `
+                        :
+                        ""
+                      }
+
+                    </div>
+
+                  </div>
+
+                `;
+
+              }
+            ).join("")
+            :
+            `
+              <div class="empty">
+                No change claims yet.
+              </div>
+            `
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="footer">
+
+        <strong>
+          SHUTLER
+        </strong>
+
+        · Driver verification keeps the credit accountable.
+
+      </div>
+
+    </main>
+
+  `;
+
+}
+
+
+/* =========================================================
+   DRIVER DECISION
+   ========================================================= */
+
+function driverDecision(
+  id,
+  status
+){
+
+  const d=db();
+
+  const u=session();
+
+  const c=
+    d.claims.find(
+      x=>x.id===id
+    );
+
+
+  if(
+    !c ||
+    c.driverId!==u.id ||
+    c.status!=="pending"
+  ){
+
+    return toast(
+      "This claim has already been processed."
+    );
+
+  }
+
+
+  c.status=
+    status;
+
+
+  const st=
+    d.users.find(
+      x=>x.id===c.studentId
+    );
+
+
+  const tx=
+    d.transactions.find(
+      t=>t.claimId===c.id
+    );
+
+
+  if(
+    status==="confirmed" &&
+    st
+  ){
+
+    st.credit=
+      Number(st.credit||0)+
+      Number(c.amount);
+
+
+    if(tx){
+
+      tx.status=
+        "confirmed";
+
+      tx.title=
+        "Change credit received";
+
+      tx.detail=
+        `Driver confirmed · ${timeNow()}`;
+
+    }else{
+
+      d.transactions.push({
+
+        id:
+          "t"+Date.now(),
+
+        userId:st.id,
+
+        type:"credit",
+
+        amount:c.amount,
+
+        title:"Change credit received",
+
+        detail:
+          `Driver confirmed · ${timeNow()}`,
+
+        status:"confirmed",
+
+        claimId:c.id
+
+      });
+
+    }
+
+  }else if(tx){
+
+    tx.status=
+      "rejected";
+
+    tx.title=
+      "Change claim rejected";
+
+    tx.detail=
+      `Driver rejected · ${timeNow()}`;
+
+  }
+
+
+  save(d);
+
+  toast(
+    status==="confirmed"
+    ?
+    "Claim confirmed — student credit updated."
+    :
+    "Claim rejected."
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   PENDING DRIVER
+   ========================================================= */
+
+function pendingDriver(u){
+
+  return `
+
+    ${header(u)}
+
+    <main class="shell">
+
+      <div
+        class="card centered"
+        style="
+          max-width:680px;
+          margin:70px auto;
+          padding:40px;
+        "
+      >
+
+        <span class="badge pending">
+          Waiting for approval
+        </span>
+
+        <h2 style="margin-top:14px">
+          Driver account submitted
+        </h2>
+
+        <p class="muted">
+
+          Your
+          ${esc(u.school)}
+          driver account is waiting
+          for approval by the transport admin.
+
+        </p>
+
+
+        <div class="notice">
+
+          Once approved, you can display your
+          SHUTLER QR and respond to student
+          change claims.
+
+        </div>
+
+
+        <button
+          class="btn outline"
+          style="margin-top:12px"
+          onclick="logout()"
+        >
+          Back to sign in
+        </button>
+
+      </div>
+
+    </main>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+function admin(user){
+
+  const d=db();
+
+  const drivers=
+    d.users.filter(
+      u=>
+        u.role==="driver" &&
+        u.school===user.school
+    );
+
+
+  const issues=
+    d.issues
+    .filter(
+      i=>
+        d.users.find(
+          x=>x.id===i.studentId
+        )?.school===user.school
+    )
+    .slice()
+    .reverse();
+
+
+  return `
+
+    ${header(user)}
+
+    <main class="shell">
+
+      ${appNav("admin")}
+
+
+      <div class="page-head">
+
+        <div>
+
+          <div class="eyebrow">
+            Transport office ·
+            ${esc(user.school)}
+          </div>
+
+          <h2>
+            Admin control centre
+          </h2>
+
+          <p class="muted">
+            Approve registered drivers and resolve
+            student-reported transaction issues.
+          </p>
+
+        </div>
+
+
+        <button
+          class="btn outline"
+          onclick="resetDemo()"
+        >
+          Reset demo
+        </button>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+        <div class="stat">
+
+          <div class="label">
+            Registered drivers
+          </div>
+
+          <div class="value">
+            ${drivers.length}
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Pending approvals
+          </div>
+
+          <div class="value">
+            ${
+              drivers.filter(
+                x=>x.status==="pending"
+              ).length
+            }
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            Open issues
+          </div>
+
+          <div class="value">
+            ${
+              issues.filter(
+                x=>x.status==="open"
+              ).length
+            }
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="label">
+            System status
+          </div>
+
+          <div
+            class="value"
+            style="
+              font-size:21px;
+              color:var(--green)
+            "
+          >
+            Demo live
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid two">
+
+
+        <div class="card">
+
+          <div class="eyebrow">
+            Driver management
+          </div>
+
+          <h3>
+            Approval queue
+          </h3>
+
+
+          <div class="list">
+
+            ${
+              drivers.length
+              ?
+              drivers.map(
+                x=>`
+
+                  <div class="row">
+
+                    <div class="row-main">
+
+                      <div class="row-title">
+                        ${esc(x.name)}
+                      </div>
+
+                      <div class="row-sub">
+                        ${esc(x.email)}
+                        ·
+                        ${esc(x.school)}
+                      </div>
+
+                    </div>
+
+
+                    <div class="actions">
+
+                      <span
+                        class="badge ${x.status}"
+                      >
+                        ${esc(x.status)}
+                      </span>
+
+
+                      ${
+                        x.status==="pending"
+                        ?
+                        `
+                          <button
+                            class="btn green"
+                            onclick="
+                              adminDecision(
+                                '${esc(x.id)}',
+                                'approved'
+                              )
+                            "
+                          >
+                            Approve
+                          </button>
+
+
+                          <button
+                            class="btn red"
+                            onclick="
+                              adminDecision(
+                                '${esc(x.id)}',
+                                'rejected'
+                              )
+                            "
+                          >
+                            Reject
+                          </button>
+                        `
+                        :
+                        ""
+                      }
+
+                    </div>
+
+                  </div>
+
+                `
+              ).join("")
+              :
+              `
+                <div class="empty">
+                  No drivers found.
+                </div>
+              `
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="eyebrow">
+            Student support
+          </div>
+
+          <h3>
+            Transaction issues
+          </h3>
+
+
+          <div class="list">
+
+            ${
+              issues.length
+              ?
+              issues.map(
+                i=>{
+
+                  const st=
+                    d.users.find(
+                      x=>x.id===i.studentId
+                    );
+
+
+                  return `
+
+                    <div class="row">
+
+                      <div class="row-main">
+
+                        <div class="row-title">
+                          ${esc(i.title)}
+                        </div>
+
+                        <div class="row-sub">
+
+                          ${esc(
+                            st?.name||
+                            "Student"
+                          )}
+
+                          ·
+
+                          ${esc(i.text)}
+
+                        </div>
+
+                      </div>
+
+
+                      <div class="actions">
+
+                        <span
+                          class="badge ${i.status}"
+                        >
+                          ${esc(i.status)}
+                        </span>
+
+
+                        ${
+                          i.status==="open"
+                          ?
+                          `
+                            <button
+                              class="btn green"
+                              onclick="
+                                resolveIssue(
+                                  '${esc(i.id)}'
+                                )
+                              "
+                            >
+                              Resolve
+                            </button>
+                          `
+                          :
+                          ""
+                        }
+
+                      </div>
+
+                    </div>
+
+                  `;
+
+                }
+              ).join("")
+              :
+              `
+                <div class="empty">
+                  No issues reported.
+                </div>
+              `
+            }
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="footer">
+
+        <strong>
+          SHUTLER
+        </strong>
+
+        · Transport operations demo.
+
+      </div>
+
+    </main>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ADMIN DECISION
+   ========================================================= */
+
+function adminDecision(
+  id,
+  status
+){
+
+  const d=db();
+
+  const u=session();
+
+  const x=
+    d.users.find(
+      x=>
+        x.id===id &&
+        x.school===u.school &&
+        x.role==="driver"
+    );
+
+
+  if(!x){
+
+    return;
+
+  }
+
+
+  x.status=
+    status;
+
+
+  save(d);
+
+  toast(
+    `Driver ${status}.`
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   STUDENT ISSUE SUBMISSION
+   ========================================================= */
+
+function submitIssue(e){
+
+  e.preventDefault();
+
+  const u=session();
+
+  const d=db();
+
+  const textValue=
+    document.getElementById(
+      "issueText"
+    ).value.trim();
+
+
+  if(!textValue){
+
+    return;
+
+  }
+
+
+  d.issues.push({
+
+    id:
+      "i"+Date.now(),
+
+    studentId:u.id,
+
+    title:
+      "Student transaction issue",
+
+    text:textValue,
+
+    status:"open",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+
+  save(d);
+
+  toast(
+    "Issue sent to the transport admin."
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   ISSUE RESOLUTION
+   ========================================================= */
+
+function resolveIssue(id){
+
+  const d=db();
+
+  const u=session();
+
+  const i=
+    d.issues.find(
+      x=>x.id===id
+    );
+
+
+  if(!i){
+
+    return;
+
+  }
+
+
+  const st=
+    d.users.find(
+      x=>x.id===i.studentId
+    );
+
+
+  if(
+    !st ||
+    st.school!==u.school
+  ){
+
+    return;
+
+  }
+
+
+  i.status=
+    "resolved";
+
+
+  save(d);
+
+  toast(
+    "Issue resolved."
+  );
+
+  render();
+
+}
+
+
+/* =========================================================
+   DRIVER QR GENERATOR
+   ========================================================= */
+
+async function openQR(id){
+
+  const d=db();
+
+
+  const u=
+    d.users.find(
+      x=>
+        x.id===id &&
+        x.role==="driver" &&
+        x.status==="approved"
+    );
+
+
+  if(!u){
+
+    return toast(
+      "Approved driver not found."
+    );
+
+  }
+
+
+  const modal=
+    document.getElementById(
+      "modal"
+    );
+
+
+  modal.innerHTML=`
+
+    <div class="modal-box">
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+
+      <div class="eyebrow">
+        DRIVER QR
+      </div>
+
+
+      <h2>
+        ${esc(u.name)}
+      </h2>
+
+
+      <p class="muted">
+        ${esc(u.school)}
+        · Approved SHUTLER driver
+      </p>
+
+
+      <div
+        id="qr"
+        class="qr-holder"
+      >
+
+        <div class="muted small">
+          Generating driver QR…
+        </div>
+
+      </div>
+
+
+      <div
+        class="notice centered"
+        style="margin-top:10px"
+      >
+
+        <b>
+          Presentation tip:
+        </b>
+
+        Keep this QR visible on the phone
+        while the student scans it with
+        the laptop webcam.
+
+      </div>
+
+
+      <p class="small muted centered">
+
+        The QR contains only the SHUTLER
+        driver identifier and school.
+
+      </p>
+
+    </div>
+
+  `;
+
+
+  modal.classList.remove(
+    "hidden"
+  );
+
+
+  try{
+
+    const QRCodeClass=
+      await ensureQRLib();
+
+
+    const qr=
+      document.getElementById(
+        "qr"
+      );
+
+
+    if(!qr){
+
+      return;
+
+    }
+
+
+    qr.innerHTML="";
+
+
+    /*
+      IMPORTANT:
+      This is the exact data that the
+      student scanner expects.
+    */
+
+    const payload=
+      JSON.stringify({
+
+        app:APP_NAME,
+
+        version:1,
+
+        driverId:u.id,
+
+        school:u.school
+
+      });
+
+
+    new QRCodeClass(
+
+      qr,
+
+      {
+
+        text:payload,
+
+        width:260,
+
+        height:260,
+
+        colorDark:"#08264d",
+
+        colorLight:"#ffffff",
+
+        correctLevel:
+          QRCodeClass.CorrectLevel.M
+
+      }
+
+    );
+
+
+  }catch(e){
+
+    const qr=
+      document.getElementById(
+        "qr"
+      );
+
+
+    if(qr){
+
+      qr.innerHTML=`
+
+        <div class="danger-note">
+
+          QR generator could not load.
+
+          <br><br>
+
+          Check your internet connection
+          and reopen the QR.
+
+        </div>
+
+      `;
+
+    }
+
+
+    toast(
+      "QR generator could not load."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function closeModal(){
+
+  stopScanner();
+
+  const modal=
+    document.getElementById(
+      "modal"
+    );
+
+
+  modal.classList.add(
+    "hidden"
+  );
+
+
+  modal.innerHTML="";
+
+}
+
+
+/* =========================================================
+   MAIN RENDER
+   ========================================================= */
+
 function render(){
-  stopScanner();const u=session();
-  document.getElementById("app").innerHTML=u?(u.role==="student"?student(u):u.role==="driver"?(u.status==="approved"?driver(u):pendingDriver(u)):admin(u)):landing();
+
+  /*
+    Stop any webcam before changing pages.
+  */
+
+  stopScanner();
+
+
+  const u=session();
+
+
+  document.getElementById(
+    "app"
+  ).innerHTML=
+
+    u
+    ?
+      (
+        u.role==="student"
+        ?
+        student(u)
+
+        :
+
+        u.role==="driver"
+        ?
+          (
+            u.status==="approved"
+            ?
+            driver(u)
+            :
+            pendingDriver(u)
+          )
+
+        :
+
+        admin(u)
+      )
+
+    :
+
+    landing();
+
 }
-window.showAuth=m=>{stopScanner();document.getElementById("app").innerHTML=auth(m,"student")};
-window.refreshAuthRole=refreshAuthRole;window.createAccount=createAccount;window.doLogin=doLogin;window.logout=logout;window.resetDemo=resetDemo;
-window.studentAction=studentAction;window.demoScan=demoScan;window.startScanner=startScanner;window.submitClaim=submitClaim;window.driverDecision=driverDecision;
-window.adminDecision=adminDecision;window.submitIssue=submitIssue;window.resolveIssue=resolveIssue;window.openQR=openQR;window.closeModal=closeModal;
-window.fundDemoWallet=fundDemoWallet;window.useCredit=useCredit;window.updatePreview=updatePreview;window.goHome=goHome;
+
+
+/* =========================================================
+   GLOBAL FUNCTIONS
+   ========================================================= */
+
+window.showAuth=
+  m=>{
+    stopScanner();
+
+    document.getElementById(
+      "app"
+    ).innerHTML=
+      auth(
+        m,
+        "student"
+      );
+  };
+
+
+window.refreshAuthRole=
+  refreshAuthRole;
+
+window.createAccount=
+  createAccount;
+
+window.doLogin=
+  doLogin;
+
+window.logout=
+  logout;
+
+window.resetDemo=
+  resetDemo;
+
+window.studentAction=
+  studentAction;
+
+window.demoScan=
+  demoScan;
+
+window.startScanner=
+  startScanner;
+
+window.submitClaim=
+  submitClaim;
+
+window.driverDecision=
+  driverDecision;
+
+window.adminDecision=
+  adminDecision;
+
+window.submitIssue=
+  submitIssue;
+
+window.resolveIssue=
+  resolveIssue;
+
+window.openQR=
+  openQR;
+
+window.closeModal=
+  closeModal;
+
+window.fundDemoWallet=
+  fundDemoWallet;
+
+window.useCredit=
+  useCredit;
+
+window.updatePreview=
+  updatePreview;
+
+window.goHome=
+  goHome;
+
+
+/*
+  Make sure the camera is released if
+  the page is closed or refreshed.
+*/
+
+window.addEventListener(
+  "beforeunload",
+  ()=>{
+    try{
+      stopScanner();
+    }catch(e){}
+  }
+);
+
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
+
 render();
+
 </script>
+
 </body>
 </html>
